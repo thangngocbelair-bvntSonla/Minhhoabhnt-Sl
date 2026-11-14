@@ -638,6 +638,65 @@
           flex: 1 1 100%;
         }
       }
+      /* Đảm bảo màn hình Preview luôn có nút Quay lại chỉnh sửa cố định trên đầu & dưới đáy */
+      body:not(.summary-preview-open) {
+        overflow: auto !important;
+        pointer-events: auto !important;
+      }
+      #summaryPreviewScreen[hidden] {
+        display: none !important;
+        pointer-events: none !important;
+      }
+      .summary-preview-header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        width: 100%;
+      }
+      .summary-back-top-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #ffffff;
+        color: #003b7a;
+        border: 2px solid #ffffff;
+        font-weight: 800;
+        font-size: 0.9rem;
+        padding: 9px 16px;
+        border-radius: 999px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: all 0.18s ease;
+        white-space: nowrap;
+      }
+      .summary-back-top-btn:hover {
+        background: #f4c542;
+        border-color: #f4c542;
+        color: #172033;
+      }
+      .summary-preview-actions {
+        position: sticky !important;
+        bottom: 0 !important;
+        z-index: 100 !important;
+        background: rgba(255, 255, 255, 0.96) !important;
+        backdrop-filter: blur(8px);
+        padding: 12px 16px !important;
+        border-top: 1px solid #d8e2ee !important;
+        box-shadow: 0 -8px 24px rgba(0, 45, 98, 0.12) !important;
+        border-radius: 14px 14px 0 0 !important;
+      }
+      #editSummaryPlan {
+        background: #eef6ff !important;
+        color: #003b7a !important;
+        border: 2px solid #004b93 !important;
+        font-weight: 800 !important;
+      }
+      #editSummaryPlan:hover {
+        background: #003b7a !important;
+        color: #ffffff !important;
+      }
     </style>
   </head>
   <body>
@@ -1095,8 +1154,15 @@
       <div class="summary-preview-shell">
         <header class="summary-preview-header">
           <div style="width: 100%;">
-            <span>Tóm tắt phương án & Poster điện thoại</span>
-            <h1 id="summaryPreviewTitle">Bảo Việt Nhân Thọ</h1>
+            <div class="summary-preview-header-top">
+              <div>
+                <span>Tóm tắt phương án & Poster điện thoại</span>
+                <h1 id="summaryPreviewTitle" style="margin: 2px 0 0 0;">Bảo Việt Nhân Thọ</h1>
+              </div>
+              <button id="topBackToEditBtn" class="summary-back-top-btn" type="button" data-close-summary-preview>
+                ⬅️ Quay lại chỉnh sửa
+              </button>
+            </div>
             <div class="summary-mode-tabs" role="tablist" aria-label="Chọn chế độ xem Poster hoặc PDF">
               <button type="button" id="modeTabLongPoster" class="summary-mode-tab active" data-preview-mode="longPoster" role="tab" aria-selected="true">
                 📜 Poster Dài (Gộp chi tiết SPBK)
@@ -1471,10 +1537,14 @@
         function withRoleRiderState(role, callback) {
           const prevSelections = riderState.selections;
           const prevActiveCode = riderState.activeCode;
+          const prevActivePerson = window.__activeRiderPerson;
+          const prevSyncedRole = currentSyncedRole;
           const store = multiRiderStore[role];
           if (riderState.selections === store.selections) {
             store.activeCode = riderState.activeCode || store.activeCode || "R21";
           }
+          window.__activeRiderPerson = role;
+          currentSyncedRole = role;
           riderState.selections = store.selections;
           riderState.activeCode = store.activeCode || "R21";
           try {
@@ -1483,6 +1553,8 @@
             store.activeCode = riderState.activeCode;
             riderState.selections = prevSelections;
             riderState.activeCode = prevActiveCode;
+            window.__activeRiderPerson = prevActivePerson;
+            currentSyncedRole = prevSyncedRole;
           }
         }
 
@@ -3093,8 +3165,10 @@
 
         // Mở rộng buildSummarySnapshot để đính kèm hồ sơ BMBH + NĐBH và bảng chi tiết quyền lợi của toàn bộ SPBK đã chọn
         const baseBuildSummarySnapshotV16 = window.buildSummarySnapshot;
-        window.buildSummarySnapshot = function () {
+        window.buildSummarySnapshot = function (includeDetailedSections) {
+          const savedRole = getEffectiveRiderRole();
           const snapshot = baseBuildSummarySnapshotV16();
+          syncRiderStateToRole(savedRole, false);
           if (!snapshot || !snapshot.valid) return snapshot;
 
           snapshot.isSamePerson = isSamePersonMode();
@@ -4046,7 +4120,9 @@
 
         // Ghi đè openSummaryPreview để tạo đồng thời Poster Dài (gộp SPBK), Poster Ngắn và PDF đầy đủ
         window.openSummaryPreview = async function (event) {
-          const snapshot = buildSummarySnapshot();
+          const savedActiveRoleBeforeExport = getEffectiveRiderRole();
+          const snapshot = window.buildSummarySnapshot(true);
+          syncRiderStateToRole(savedActiveRoleBeforeExport, false);
           trackSummaryExportClick(snapshot, event?.currentTarget?.id);
           const status = document.getElementById("summaryExportStatus");
           if (!snapshot.valid) {
@@ -4178,6 +4254,61 @@
           if (shareStatus) {
             shareStatus.textContent = "Trình duyệt máy tính chưa hỗ trợ mở trực tiếp ứng dụng Zalo. File '" + targetFile.filename + "' đã được tải về máy để anh gửi qua Zalo.";
           }
+        };
+
+        // Ghi đè triggerFileDownload để tải file an toàn, không làm ngắt kết nối sự kiện của trang hiện tại
+        window.triggerFileDownload = function (file) {
+          if (!file?.objectUrl || !file.filename) return;
+          const link = document.createElement("a");
+          link.href = file.objectUrl;
+          link.download = file.filename;
+          link.rel = "noopener";
+          link.style.display = "none";
+          document.body.appendChild(link);
+          link.click();
+          window.setTimeout(function () {
+            link.remove();
+          }, 150);
+
+          const shareStatus = document.getElementById("summaryShareStatus");
+          if (shareStatus) {
+            shareStatus.textContent = "✅ Đã tải xuống '" + file.filename + "'. Anh bấm 'Quay lại chỉnh sửa' (hoặc phím Esc) để tiếp tục điều chỉnh phương án.";
+          }
+        };
+
+        // Ghi đè openRiderTerms để mở file PDF điều khoản SPBK ở Tab mới thay vì đè lên trang nhập minh họa hiện tại
+        window.openRiderTerms = function (code) {
+          if (!SPBK_PRODUCTS[code]) return;
+          window.open(getRiderTermsPdfUrl(code), "_blank", "noopener");
+        };
+
+        // Ghi đè closeSummaryPreview để đóng màn hình Preview và khôi phục 100% kết nối với Form nhập minh họa & SPBK
+        window.closeSummaryPreview = function () {
+          const screen = document.getElementById("summaryPreviewScreen");
+          if (screen) {
+            screen.hidden = true;
+          }
+          document.body.classList.remove("summary-preview-open");
+          document.body.style.overflow = "";
+          document.documentElement.style.overflow = "";
+
+          // Đồng bộ lại trạng thái giỏ SPBK và kết nối lại toàn bộ hàm tính toán của Form
+          const activeRole = getEffectiveRiderRole();
+          syncRiderStateToRole(activeRole, false);
+          updateAgePreview();
+          updateDeathSumAssuredRange();
+          updateDisabilitySumAssured();
+          if (selectedMainProduct === "ASGD" && typeof updateAsgdConfigUI === "function") {
+            updateAsgdConfigUI(false);
+          }
+          if (isLifeCare20()) {
+            updateLifeCarePremium();
+            renderLifeCareBenefits();
+          } else if (!document.getElementById("resultsSection").hidden) {
+            window.refreshIllustration();
+          }
+          window.renderRiderUI();
+          updateSummaryExportAvailability();
         };
 
         // --- XỬ LÝ SỰ KIỆN ĐỘC LẬP CHO BMBH VÀ NĐBH ---
@@ -4642,7 +4773,34 @@
               });
               return;
             }
+
+            const closePreviewBtn = e.target.closest("#editSummaryPlan, #topBackToEditBtn, [data-close-summary-preview]");
+            if (closePreviewBtn) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+              window.closeSummaryPreview();
+              return;
+            }
+
+            // Nếu bấm ra vùng nền tối bên ngoài khung .summary-preview-shell thì cũng đóng Preview để quay lại chỉnh sửa
+            if (e.target && e.target.id === "summaryPreviewScreen") {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+              window.closeSummaryPreview();
+              return;
+            }
           }, true);
+
+          // Bấm phím Escape (Esc) để đóng nhanh màn hình Xuất tóm tắt và quay về chỉnh sửa
+          document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") {
+              const screen = document.getElementById("summaryPreviewScreen");
+              if (screen && !screen.hidden) {
+                e.preventDefault();
+                window.closeSummaryPreview();
+              }
+            }
+          });
 
           // Khởi tạo trạng thái ban đầu: BMBH và NĐBH là cùng 1 người
           setSamePersonMode(true);
