@@ -90,13 +90,31 @@
         font-size: 0.95rem !important;
         color: #172033 !important;
       }
+      body:not(.riders-mode) #occupationGroup2:disabled {
+        grid-column: 3;
+        grid-row: 1;
+        max-width: none;
+      }
+      body:not(.riders-mode) #occupationJobNote2 {
+        display: block;
+        grid-column: 2 / -1;
+        grid-row: 4;
+        justify-self: end;
+        max-width: 100%;
+        min-height: 0;
+        color: #9f1239;
+        font-size: 10px;
+        line-height: 1.2;
+        text-align: right;
+        white-space: normal;
+      }
       #occupationSuggestions2 {
         position: fixed;
         z-index: 99999;
         max-height: 280px;
         overflow-y: auto;
         background: #ffffff;
-        border: 1px solid #d8e2ee;
+        border: 1px solid #c7d6ea;
         border-radius: 12px;
         box-shadow: 0 14px 34px rgba(0, 45, 98, 0.18);
         padding: 6px;
@@ -106,32 +124,45 @@
         display: none !important;
       }
       #occupationSuggestions2 .occupation-option {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        width: 100%;
-        padding: 10px 12px;
-        border: 0;
-        border-radius: 8px;
-        background: transparent;
-        color: #172033;
-        font-size: 0.92rem;
-        text-align: left;
-        cursor: pointer;
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) auto !important;
+        align-items: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+        padding: 10px 12px !important;
+        border: 0 !important;
+        border-bottom: 1px solid #edf2f7 !important;
+        border-radius: 8px !important;
+        background: transparent !important;
+        color: #172033 !important;
+        font-size: 0.9rem !important;
+        line-height: 1.35 !important;
+        text-align: left !important;
+        cursor: pointer !important;
+        box-sizing: border-box !important;
+      }
+      #occupationSuggestions2 .occupation-option span {
+        display: block !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        color: #123263 !important;
+        font-weight: 600 !important;
+        font-size: 0.88rem !important;
+        line-height: 1.35 !important;
       }
       #occupationSuggestions2 .occupation-option:hover,
       #occupationSuggestions2 .occupation-option:focus {
-        background: #eef6ff;
+        background: #eef6ff !important;
       }
       #occupationSuggestions2 .occupation-option strong {
-        color: #003b7a;
-        font-weight: 800;
-        white-space: nowrap;
-        background: #e6f0fa;
-        padding: 3px 9px;
-        border-radius: 999px;
-        font-size: 0.82rem;
+        color: #003b7a !important;
+        font-weight: 800 !important;
+        white-space: nowrap !important;
+        background: #e6f0fa !important;
+        padding: 4px 10px !important;
+        border-radius: 999px !important;
+        font-size: 0.8rem !important;
       }
       #occupationSuggestions2 .occupation-empty {
         padding: 12px;
@@ -141,9 +172,13 @@
       }
       @media (max-width: 640px) {
         #occupationSuggestions2 {
-          position: static;
+          position: static !important;
+          grid-column: 1 / -1 !important;
+          grid-row: 3 !important;
           width: 100% !important;
-          margin-top: 6px;
+          max-width: 100% !important;
+          max-height: 250px !important;
+          margin-top: 6px !important;
         }
         .same-person-confirm-box {
           flex-direction: column;
@@ -3446,9 +3481,9 @@
 
             card(margin, y, halfW, 118, 16);
             ctx.fillStyle = "#e6f0fa";
-            drawRoundedRect(ctx, margin + 18, y + 14, 150, 28, 999);
+            drawRoundedRect(ctx, margin + 18, y + 14, 192, 28, 999);
             ctx.fill();
-            drawText(ctx, "👤 BÊN MUA BH (BMBH)", margin + 93, y + 19, { size: 14, weight: 900, color: colors.navy, align: "center" });
+            drawText(ctx, "👤 BÊN MUA BH (BMBH)", margin + 114, y + 19, { size: 14, weight: 900, color: colors.navy, align: "center" });
             drawText(ctx, bmbh.fullName || "BMBH", margin + 20, y + 50, { size: 25, weight: 900, color: colors.ink, fitWidth: halfW - 40, minSize: 19 });
             drawText(
               ctx,
@@ -3461,9 +3496,9 @@
             const rightCardX = margin + halfW + colGap;
             card(rightCardX, y, halfW, 118, 16, "#ffffff", "#8fd3ce");
             ctx.fillStyle = "#e0f7f5";
-            drawRoundedRect(ctx, rightCardX + 18, y + 14, 175, 28, 999);
+            drawRoundedRect(ctx, rightCardX + 18, y + 14, 218, 28, 999);
             ctx.fill();
-            drawText(ctx, "🛡️ NGƯỜI ĐƯỢC BH (NĐBH)", rightCardX + 105, y + 19, { size: 14, weight: 900, color: "#0b7a75", align: "center" });
+            drawText(ctx, "🛡️ NGƯỜI ĐƯỢC BH (NĐBH)", rightCardX + 127, y + 19, { size: 14, weight: 900, color: "#0b7a75", align: "center" });
             drawText(ctx, ndbh.fullName || snapshot.customerName || "NĐBH", rightCardX + 20, y + 50, { size: 25, weight: 900, color: colors.ink, fitWidth: halfW - 40, minSize: 19 });
             drawText(
               ctx,
@@ -3475,25 +3510,53 @@
 
             y += 130;
 
-            // Thanh Tổng phí hợp đồng & Tiết kiệm mỗi ngày
-            card(margin, y, contentW, 82, 16, "#fffdf4", "#f2bd81");
-            icon(margin + 52, y + 41, colors.blue, "✓");
-            drawText(ctx, "TỔNG PHÍ HỢP ĐỒNG (SPC + SPBK):", margin + 96, y + 28, { size: 19, weight: 900, color: colors.blue });
-            drawText(ctx, formatVND(totalAnnualPremium) + " đồng/năm", margin + 430, y + 25, { size: 26, weight: 900, color: colors.ink, fitWidth: 260, minSize: 20 });
+            // Thanh Tổng phí hợp đồng & Tiết kiệm mỗi ngày (Bố cục 2 cột - 2 dòng thoáng rõ, không bao giờ đè chữ)
+            const summaryBarH = 94;
+            const splitX = margin + Math.round(contentW * 0.54);
+            card(margin, y, contentW, summaryBarH, 16, "#fffdf4", "#f2bd81");
+
+            // Cột trái: Tổng phí hợp đồng (SPC + SPBK)
+            icon(margin + 52, y + 47, colors.blue, "✓");
+            drawText(ctx, "TỔNG PHÍ HỢP ĐỒNG (SPC + SPBK)", margin + 96, y + 18, {
+              size: 16,
+              weight: 850,
+              color: colors.blue,
+              fitWidth: splitX - (margin + 112),
+              minSize: 13
+            });
+            drawText(ctx, formatVND(totalAnnualPremium) + " đồng/năm", margin + 96, y + 46, {
+              size: 27,
+              weight: 900,
+              color: colors.ink,
+              fitWidth: splitX - (margin + 112),
+              minSize: 20
+            });
+
+            // Đường kẻ dọc phân cách
             ctx.strokeStyle = "#f2d59b";
-            ctx.lineWidth = 1.5;
+            ctx.lineWidth = 1.6;
             ctx.beginPath();
-            ctx.moveTo(margin + 695, y + 16);
-            ctx.lineTo(margin + 695, y + 66);
+            ctx.moveTo(splitX, y + 16);
+            ctx.lineTo(splitX, y + summaryBarH - 16);
             ctx.stroke();
-            drawText(ctx, "Chỉ cần tiết kiệm: " + formatVND(Math.ceil(totalAnnualPremium / 365)) + " đ/ngày", margin + 718, y + 27, {
-              size: 22,
+
+            // Cột phải: Tiết kiệm mỗi ngày
+            icon(splitX + 52, y + 47, colors.gold, "≋");
+            drawText(ctx, "CHỈ CẦN TIẾT KIỆM MỖI NGÀY", splitX + 96, y + 18, {
+              size: 16,
+              weight: 850,
+              color: colors.gold,
+              fitWidth: (margin + contentW) - (splitX + 112),
+              minSize: 13
+            });
+            drawText(ctx, formatVND(Math.ceil(totalAnnualPremium / 365)) + " đồng/ngày", splitX + 96, y + 46, {
+              size: 27,
               weight: 900,
               color: colors.gold,
-              fitWidth: 280,
-              minSize: 17
+              fitWidth: (margin + contentW) - (splitX + 112),
+              minSize: 20
             });
-            y += 96;
+            y += summaryBarH + 14;
           }
 
           // 3. THÔNG SỐ HỢP ĐỒNG (6 Ô)
