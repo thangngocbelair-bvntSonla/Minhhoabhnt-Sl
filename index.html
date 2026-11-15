@@ -9,6 +9,12 @@
     <meta property="og:description" content="Minh họa quyền lợi bảo hiểm" />
     <meta name="twitter:title" content="Minh họa quyền lợi bảo hiểm" />
     <meta name="twitter:description" content="Minh họa quyền lợi bảo hiểm" />
+    <meta name="author" content="Design by AD Nghĩa • BVNT Sơn La" />
+    <meta name="theme-color" content="#003b7a" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="BVNT Sơn La" />
     <link rel="stylesheet" href="styles.css?v=20260716-ipad-summary-responsive" />
     <style>
       /* Khối xác nhận BMBH và NĐBH là 1 người */
@@ -732,13 +738,191 @@
         background: #003b7a !important;
         color: #ffffff !important;
       }
+      /* Huy hiệu bản quyền góc nhỏ trái Banner & Chân trang & Cài đặt App PWA */
+      .banner-slot {
+        position: relative !important;
+        overflow: hidden !important;
+        border-radius: 14px !important;
+      }
+      .banner-slot img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .author-signature-badge {
+        position: absolute !important;
+        left: 10px !important;
+        bottom: 10px !important;
+        z-index: 30 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 4px 11px !important;
+        border-radius: 999px !important;
+        background: linear-gradient(135deg, rgba(0, 38, 84, 0.86) 0%, rgba(0, 75, 147, 0.82) 100%) !important;
+        border: 1px solid rgba(244, 197, 66, 0.85) !important;
+        box-shadow: 0 4px 12px rgba(0, 18, 46, 0.32) !important;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        color: #ffffff !important;
+        font-size: 0.74rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.2px !important;
+        line-height: 1.2 !important;
+        pointer-events: auto !important;
+        user-select: none !important;
+        -webkit-user-select: none !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      .author-signature-badge .sig-star {
+        color: #f4c542 !important;
+        font-size: 0.8rem !important;
+      }
+      .author-signature-badge .sig-text {
+        color: #ffffff !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35) !important;
+      }
+      .app-copyright-footer {
+        margin: 18px 0 6px 0;
+        padding: 10px 14px;
+        border-radius: 10px;
+        background: #eef5fc;
+        border: 1px solid #d4e3f3;
+        color: #003b7a;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .app-copyright-footer strong {
+        color: #d85b00;
+        font-weight: 800;
+      }
+      /* Thanh tiện ích cài App điện thoại (PWA) */
+      .pwa-install-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 10px 0 4px 0;
+        padding: 9px 12px;
+        border-radius: 11px;
+        background: linear-gradient(90deg, #eef6ff 0%, #fffdf4 100%);
+        border: 1px solid #cfe1f2;
+      }
+      .pwa-install-bar[hidden] {
+        display: none !important;
+      }
+      .pwa-install-info {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        color: #003b7a;
+        font-weight: 700;
+      }
+      .pwa-install-btn {
+        border: none;
+        background: linear-gradient(135deg, #003b7a 0%, #0059b8 100%);
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 0.8rem;
+        padding: 7px 13px;
+        border-radius: 999px;
+        cursor: pointer;
+        box-shadow: 0 3px 10px rgba(0, 59, 122, 0.2);
+        white-space: nowrap;
+      }
+      .pwa-install-btn:hover {
+        background: #002b5c;
+      }
+      .pwa-guide-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 100000;
+        background: rgba(8, 25, 54, 0.62);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      .pwa-guide-modal[hidden] {
+        display: none !important;
+      }
+      .pwa-guide-dialog {
+        background: #ffffff;
+        border-radius: 16px;
+        max-width: 420px;
+        width: 100%;
+        padding: 18px;
+        box-shadow: 0 20px 45px rgba(0, 25, 64, 0.32);
+        border: 1px solid #d8e2ee;
+      }
+      .pwa-guide-dialog h3 {
+        margin: 0 0 8px 0;
+        color: #003b7a;
+        font-size: 1.05rem;
+      }
+      .pwa-guide-dialog ol {
+        margin: 10px 0 14px 18px;
+        padding: 0;
+        color: #172033;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+      .pwa-guide-dialog li {
+        margin-bottom: 6px;
+      }
+      .pwa-guide-close {
+        width: 100%;
+        padding: 10px;
+        border: 0;
+        border-radius: 10px;
+        background: #003b7a;
+        color: #ffffff;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      @media (max-width: 640px) {
+        .author-signature-badge {
+          left: 8px !important;
+          bottom: 7px !important;
+          padding: 3px 9px !important;
+          font-size: 0.66rem !important;
+        }
+        .pwa-install-bar {
+          padding: 8px 10px;
+        }
+      }
     </style>
   </head>
   <body>
     <main class="app-shell">
-      <section class="banner-slot" aria-label="Banner tự chèn">
-        <img src="Banner/Banner1.png?v=20260716-banner1" alt="Banner minh họa bảo hiểm" />
+      <section class="banner-slot" id="bannerSlotContainer" aria-label="Banner tự chèn">
+        <img id="mainBannerImg" src="Banner/Banner1.png?v=20260716-banner1" alt="Banner minh họa bảo hiểm" />
+        <div id="authorSignatureBadge" class="author-signature-badge" aria-label="Bản quyền tác giả">
+          <span class="sig-star" aria-hidden="true">✨</span>
+          <span class="sig-text">Design by AD Nghĩa • BVNT Sơn La</span>
+        </div>
       </section>
+
+      <div id="pwaInstallTopBar" class="pwa-install-bar">
+        <div class="pwa-install-info">
+          <span>📱 Tiện ích Tư vấn viên:</span>
+          <span id="pwaInstallHintText">Cài đặt thành App trên màn hình chính điện thoại</span>
+        </div>
+        <button type="button" id="pwaInstallActionBtn" class="pwa-install-btn">
+          📲 Cài App vào điện thoại
+        </button>
+      </div>
 
       <nav class="tabs" aria-label="Chọn màn hình">
         <button class="tab-button tab-main active" type="button" data-tab="main">Sản phẩm chính</button>
@@ -1166,7 +1350,21 @@
           <p id="riderSummaryExportStatus" class="summary-export-status" role="status"></p>
         </section>
       </section>
+
+      <footer id="appCopyrightFooter" class="app-copyright-footer">
+        <span>🛡️ Công cụ Minh họa Quyền lợi Bảo hiểm</span>
+        <span>•</span>
+        <strong id="appFooterSignatureText">Design by AD Nghĩa • BVNT Sơn La</strong>
+      </footer>
     </main>
+
+    <section id="pwaGuideModal" class="pwa-guide-modal" hidden role="dialog" aria-modal="true" aria-labelledby="pwaGuideModalTitle">
+      <div class="pwa-guide-dialog">
+        <h3 id="pwaGuideModalTitle">📲 Hướng dẫn cài App vào điện thoại</h3>
+        <div id="pwaGuideModalContent"></div>
+        <button type="button" id="pwaGuideCloseBtn" class="pwa-guide-close">Đã hiểu</button>
+      </div>
+    </section>
 
     <section id="spbkBenefitPopup" class="spbk-benefit-popup" hidden role="dialog" aria-modal="true" aria-labelledby="spbkBenefitPopupTitle">
       <div class="spbk-benefit-overlay" data-close-spbk-benefit></div>
@@ -3436,11 +3634,13 @@
             fitWidth: contentW - 60,
             minSize: 26
           });
-          drawText(ctx, "Bảo Việt Nhân Thọ • Ngày xuất: " + snapshot.exportedAtText, canvas.width / 2, 88, {
-            size: 20,
-            weight: 700,
-            color: "#d8ebff",
-            align: "center"
+          drawText(ctx, "Bảo Việt Nhân Thọ • Ngày xuất: " + snapshot.exportedAtText + " • " + getAuthorSignatureText(), canvas.width / 2, 88, {
+            size: 19,
+            weight: 750,
+            color: "#f4c542",
+            align: "center",
+            fitWidth: contentW - 40,
+            minSize: 15
           });
 
           let y = 132;
@@ -3811,16 +4011,23 @@
           }
 
           if (!omitFooter) {
-            card(margin, y, contentW, 58, 14);
-            icon(margin + 42, y + 29, colors.blue, "i");
-            drawText(ctx, "Tài liệu minh họa tham khảo nhanh • Quyền lợi chi tiết theo Quy tắc, Điều khoản BVNT", margin + 82, y + 18, {
-              size: 19,
-              weight: 850,
+            card(margin, y, contentW, 64, 14);
+            icon(margin + 42, y + 32, colors.blue, "i");
+            drawText(ctx, "Tài liệu minh họa tham khảo nhanh • Quyền lợi chi tiết theo Quy tắc, Điều khoản BVNT", margin + 82, y + 12, {
+              size: 17,
+              weight: 800,
               color: colors.blue,
               fitWidth: contentW - 100,
-              minSize: 15
+              minSize: 14
             });
-            y += 78;
+            drawText(ctx, "✨ " + getAuthorSignatureText(), margin + 82, y + 36, {
+              size: 16,
+              weight: 900,
+              color: colors.gold,
+              fitWidth: contentW - 100,
+              minSize: 13
+            });
+            y += 84;
           } else {
             y += 12;
           }
@@ -4065,9 +4272,9 @@
             curY += c.height;
           });
 
-          // Vẽ chân trang ở cuối Poster Dài
+          // Vẽ chân trang ở cuối Poster Dài (kèm đóng dấu bản quyền Design by AD Nghĩa • BVNT Sơn La)
           lctx.fillStyle = "#ffffff";
-          drawRoundedRect(lctx, margin, curY + 8, contentW, 56, 14);
+          drawRoundedRect(lctx, margin, curY + 8, contentW, 66, 14);
           lctx.fill();
           lctx.strokeStyle = "#cfe1f2";
           lctx.lineWidth = 1.4;
@@ -4076,14 +4283,28 @@
             lctx,
             "Tài liệu tóm tắt tham khảo nhanh • Quyền lợi chi trả thực tế căn cứ Quy tắc, Điều khoản Bảo Việt Nhân Thọ",
             SUMMARY_IMAGE_WIDTH / 2,
-            curY + 24,
+            curY + 17,
             {
-              size: 18,
+              size: 17,
               weight: 800,
               color: "#003b7a",
               align: "center",
               fitWidth: contentW - 40,
-              minSize: 14
+              minSize: 13
+            }
+          );
+          drawText(
+            lctx,
+            "✨ " + getAuthorSignatureText(),
+            SUMMARY_IMAGE_WIDTH / 2,
+            curY + 42,
+            {
+              size: 17,
+              weight: 900,
+              color: "#d85b00",
+              align: "center",
+              fitWidth: contentW - 40,
+              minSize: 13
             }
           );
 
@@ -4125,11 +4346,23 @@
               pctx,
               "CHI TIẾT QUYỀN LỢI SẢN PHẨM BÁN KÈM (TRANG " + (pageIdx + 1) + "/" + pdfPages.length + ")",
               pCanvas.width / 2,
-              24,
+              16,
               {
-                size: 27,
+                size: 25,
                 weight: 900,
                 color: "#ffffff",
+                align: "center"
+              }
+            );
+            drawText(
+              pctx,
+              "✨ " + getAuthorSignatureText(),
+              pCanvas.width / 2,
+              48,
+              {
+                size: 16,
+                weight: 800,
+                color: "#f4c542",
                 align: "center"
               }
             );
@@ -4219,7 +4452,7 @@
 
           // 1. Vẽ Poster Ngắn (1 trang) & Poster không chân trang để ghép nối
           const shortCanvas = snapshot.isLifeCare20
-            ? renderLifeCareSummaryCanvas(snapshot)
+            ? stampLifeCareCanvasSignature(renderLifeCareSummaryCanvas(snapshot))
             : window.renderDashboardSummaryCanvas(snapshot, false);
 
           const baseForLongCanvas = snapshot.isLifeCare20
@@ -4373,6 +4606,180 @@
           window.renderRiderUI();
           updateSummaryExportAvailability();
         };
+
+
+        // ===============================
+        // 10. BẢO VỆ BẢN QUYỀN "Design by AD Nghĩa • BVNT Sơn La" & CÀI ĐẶT APP (PWA)
+        // ===============================
+        const _SIG_CODES = [68, 101, 115, 105, 103, 110, 32, 98, 121, 32, 65, 68, 32, 78, 103, 104, 297, 97, 32, 8226, 32, 66, 86, 78, 84, 32, 83, 417, 110, 32, 76, 97];
+
+        function getAuthorSignatureText() {
+          return String.fromCharCode.apply(null, _SIG_CODES);
+        }
+
+        function stampLifeCareCanvasSignature(canvas) {
+          if (!canvas) return canvas;
+          const ctx = canvas.getContext("2d");
+          if (!ctx) return canvas;
+          ctx.save();
+          ctx.fillStyle = "rgba(0, 38, 84, 0.86)";
+          drawRoundedRect(ctx, 34, canvas.height - 54, 420, 38, 19);
+          ctx.fill();
+          ctx.strokeStyle = "#f4c542";
+          ctx.lineWidth = 1.4;
+          ctx.stroke();
+          drawText(ctx, "✨ " + getAuthorSignatureText(), 52, canvas.height - 44, {
+            size: 16,
+            weight: 850,
+            color: "#f4c542"
+          });
+          ctx.restore();
+          return canvas;
+        }
+
+        let isRestoringSignature = false;
+
+        function ensureAuthorSignatureIntegrity() {
+          if (isRestoringSignature) return true;
+          isRestoringSignature = true;
+          try {
+            const expectedText = getAuthorSignatureText();
+            const bannerSlot = document.querySelector(".banner-slot");
+            if (bannerSlot) {
+              let badge = document.getElementById("authorSignatureBadge");
+              if (!badge || !bannerSlot.contains(badge)) {
+                badge = document.createElement("div");
+                badge.id = "authorSignatureBadge";
+                badge.className = "author-signature-badge";
+                badge.setAttribute("aria-label", "Bản quyền tác giả");
+                bannerSlot.appendChild(badge);
+              }
+              const currentText = badge.querySelector(".sig-text")?.textContent || "";
+              if (currentText !== expectedText) {
+                badge.innerHTML = '<span class="sig-star" aria-hidden="true">✨</span><span class="sig-text">' + expectedText + '</span>';
+              }
+              badge.removeAttribute("hidden");
+              badge.style.setProperty("display", "inline-flex", "important");
+              badge.style.setProperty("visibility", "visible", "important");
+              badge.style.setProperty("opacity", "1", "important");
+            }
+
+            const appShell = document.querySelector("main.app-shell");
+            if (appShell) {
+              let footer = document.getElementById("appCopyrightFooter");
+              if (!footer || !appShell.contains(footer)) {
+                footer = document.createElement("footer");
+                footer.id = "appCopyrightFooter";
+                footer.className = "app-copyright-footer";
+                appShell.appendChild(footer);
+              }
+              const footerSig = document.getElementById("appFooterSignatureText");
+              if (!footerSig || footerSig.textContent !== expectedText) {
+                footer.innerHTML =
+                  '<span>🛡️ Công cụ Minh họa Quyền lợi Bảo hiểm</span>' +
+                  '<span>•</span>' +
+                  '<strong id="appFooterSignatureText">' + expectedText + '</strong>';
+              }
+              footer.removeAttribute("hidden");
+              footer.style.setProperty("display", "flex", "important");
+              footer.style.setProperty("visibility", "visible", "important");
+              footer.style.setProperty("opacity", "1", "important");
+            }
+            return true;
+          } finally {
+            isRestoringSignature = false;
+          }
+        }
+
+        // Ràng buộc kiểm tra chữ ký bản quyền trước khi tính bảng minh họa
+        const baseGenerateIllustrationV20 = window.generateIllustration;
+        window.generateIllustration = function (input) {
+          ensureAuthorSignatureIntegrity();
+          return baseGenerateIllustrationV20(input);
+        };
+
+        // Tự động chèn chữ ký bản quyền vào cửa sổ Bảng chi tiết dòng tiền (Tab mới)
+        const baseOpenDetailedWindow = window.openDetailedTableWindow;
+        if (typeof baseOpenDetailedWindow === "function") {
+          window.openDetailedTableWindow = function () {
+            ensureAuthorSignatureIntegrity();
+            return baseOpenDetailedWindow.apply(this, arguments);
+          };
+        }
+
+        // Khởi tạo Web App Manifest & Icon tự động cho PWA (hỗ trợ cài App trên Android & iPhone)
+        function setupEmbeddedPwaManifest() {
+          try {
+            const iconCanvas = document.createElement("canvas");
+            iconCanvas.width = 512;
+            iconCanvas.height = 512;
+            const ictx = iconCanvas.getContext("2d");
+            const grad = ictx.createLinearGradient(0, 0, 512, 512);
+            grad.addColorStop(0, "#002f7f");
+            grad.addColorStop(1, "#0059b8");
+            ictx.fillStyle = grad;
+            drawRoundedRect(ictx, 0, 0, 512, 512, 110);
+            ictx.fill();
+
+            ictx.strokeStyle = "#f4c542";
+            ictx.lineWidth = 14;
+            drawRoundedRect(ictx, 28, 28, 456, 456, 88);
+            ictx.stroke();
+
+            ictx.fillStyle = "#f4c542";
+            ictx.font = "900 132px 'Segoe UI', Arial, sans-serif";
+            ictx.textAlign = "center";
+            ictx.textBaseline = "middle";
+            ictx.fillText("BVNT", 256, 205);
+
+            ictx.fillStyle = "#ffffff";
+            ictx.font = "800 58px 'Segoe UI', Arial, sans-serif";
+            ictx.fillText("MINH HỌA", 256, 325);
+
+            ictx.fillStyle = "#d8ebff";
+            ictx.font = "700 34px 'Segoe UI', Arial, sans-serif";
+            ictx.fillText("AD NGHĨA • SƠN LA", 256, 405);
+
+            const iconDataUrl = iconCanvas.toDataURL("image/png");
+
+            let appleIcon = document.querySelector('link[rel="apple-touch-icon"]');
+            if (!appleIcon) {
+              appleIcon = document.createElement("link");
+              appleIcon.rel = "apple-touch-icon";
+              document.head.appendChild(appleIcon);
+            }
+            appleIcon.href = iconDataUrl;
+
+            const manifestObj = {
+              name: "Minh Họa BVNT - Design by AD Nghĩa • BVNT Sơn La",
+              short_name: "BVNT Sơn La",
+              description: "Công cụ thiết kế và minh họa quyền lợi bảo hiểm - Design by AD Nghĩa • BVNT Sơn La",
+              start_url: window.location.href.split("#")[0],
+              display: "standalone",
+              orientation: "portrait",
+              background_color: "#f4f8fc",
+              theme_color: "#003b7a",
+              icons: [
+                {
+                  src: iconDataUrl,
+                  sizes: "512x512",
+                  type: "image/png",
+                  purpose: "any maskable"
+                }
+              ]
+            };
+
+            const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: "application/manifest+json" });
+            const manifestUrl = URL.createObjectURL(manifestBlob);
+            let manifestLink = document.querySelector('link[rel="manifest"]');
+            if (!manifestLink) {
+              manifestLink = document.createElement("link");
+              manifestLink.rel = "manifest";
+              document.head.appendChild(manifestLink);
+            }
+            manifestLink.href = manifestUrl;
+          } catch (e) {}
+        }
 
         // --- XỬ LÝ SỰ KIỆN ĐỘC LẬP CHO BMBH VÀ NĐBH ---
         const DEFAULT_JOB_GROUP_2 = 1;
@@ -4864,6 +5271,128 @@
               }
             }
           });
+
+          // E. Bảo vệ bản quyền "Design by AD Nghĩa • BVNT Sơn La" & Tự động phục hồi nếu bị chỉnh sửa DOM
+          ensureAuthorSignatureIntegrity();
+          setupEmbeddedPwaManifest();
+
+          // Tự động thử đường dẫn Banner dự phòng nếu file Banner1.png chưa khớp tên
+          const bannerImg = document.getElementById("mainBannerImg");
+          if (bannerImg) {
+            bannerImg.addEventListener("error", function () {
+              if (!bannerImg.dataset.triedFallback) {
+                bannerImg.dataset.triedFallback = "true";
+                bannerImg.src = "Banner/Gemini_Generated_Image_yr44upyr44upyr44.png";
+              }
+            });
+          }
+
+          const sigObserver = new MutationObserver(function () {
+            ensureAuthorSignatureIntegrity();
+          });
+          sigObserver.observe(document.body, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            characterData: true
+          });
+          window.setInterval(ensureAuthorSignatureIntegrity, 2500);
+
+          // Chặn chuột phải trên vùng Banner / Footer bản quyền và chặn phím tắt lưu mã nguồn (Ctrl+S, Ctrl+U, F12)
+          document.addEventListener("contextmenu", function (e) {
+            if (e.target.closest("#bannerSlotContainer, #authorSignatureBadge, #appCopyrightFooter")) {
+              e.preventDefault();
+            }
+          });
+          document.addEventListener("keydown", function (e) {
+            const key = (e.key || "").toLowerCase();
+            if ((e.ctrlKey || e.metaKey) && (key === "s" || key === "u")) {
+              e.preventDefault();
+            }
+            if (e.key === "F12" || ((e.ctrlKey || e.metaKey) && e.shiftKey && (key === "i" || key === "j" || key === "c"))) {
+              e.preventDefault();
+            }
+          });
+
+          // F. Xử lý thanh tiện ích "📲 Cài App vào điện thoại" (PWA) cho Android, iPhone và Zalo
+          let deferredPwaPrompt = null;
+          const pwaBar = document.getElementById("pwaInstallTopBar");
+          const pwaBtn = document.getElementById("pwaInstallActionBtn");
+          const pwaHint = document.getElementById("pwaInstallHintText");
+          const pwaModal = document.getElementById("pwaGuideModal");
+          const pwaModalContent = document.getElementById("pwaGuideModalContent");
+          const pwaModalClose = document.getElementById("pwaGuideCloseBtn");
+
+          const isStandaloneApp = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+          if (isStandaloneApp && pwaBar) {
+            pwaBar.hidden = true;
+          }
+
+          const ua = navigator.userAgent || "";
+          const isZaloBrowser = /Zalo/i.test(ua);
+          const isIOSDevice = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+
+          if (isZaloBrowser && pwaHint) {
+            pwaHint.textContent = "Đang mở trong Zalo • Bấm để xem cách mở trình duyệt & cài App";
+          }
+
+          window.addEventListener("beforeinstallprompt", function (e) {
+            e.preventDefault();
+            deferredPwaPrompt = e;
+            if (pwaBar && !isStandaloneApp) pwaBar.hidden = false;
+          });
+
+          window.addEventListener("appinstalled", function () {
+            deferredPwaPrompt = null;
+            if (pwaBar) pwaBar.hidden = true;
+          });
+
+          if (pwaBtn) {
+            pwaBtn.addEventListener("click", async function () {
+              if (deferredPwaPrompt) {
+                deferredPwaPrompt.prompt();
+                try {
+                  await deferredPwaPrompt.userChoice;
+                } catch (err) {}
+                deferredPwaPrompt = null;
+                return;
+              }
+
+              if (!pwaModal || !pwaModalContent) return;
+              if (isZaloBrowser) {
+                pwaModalContent.innerHTML =
+                  '<ol>' +
+                    '<li>Bấm vào biểu tượng <strong>⋯ (3 chấm)</strong> ở góc trên bên phải màn hình Zalo.</li>' +
+                    '<li>Chọn <strong>"Mở bằng trình duyệt"</strong> (Chrome hoặc Safari).</li>' +
+                    '<li>Sau khi mở ở trình duyệt, bấm lại nút <strong>📲 Cài App vào điện thoại</strong> để tạo biểu tượng ứng dụng ngoài màn hình chính.</li>' +
+                  '</ol>';
+              } else if (isIOSDevice) {
+                pwaModalContent.innerHTML =
+                  '<ol>' +
+                    '<li>Trên trình duyệt <strong>Safari</strong> của iPhone/iPad, bấm vào nút <strong>Chia sẻ (biểu tượng ô vuông có mũi tên lên ⬆️)</strong> ở thanh công cụ dưới cùng.</li>' +
+                    '<li>Kéo xuống và chọn <strong>"Thêm vào MH chính" (Add to Home Screen)</strong>.</li>' +
+                    '<li>Bấm <strong>"Thêm" (Add)</strong> ở góc trên bên phải để hoàn tất.</li>' +
+                  '</ol>';
+              } else {
+                pwaModalContent.innerHTML =
+                  '<ol>' +
+                    '<li>Bấm vào biểu tượng <strong>⋮ (Menu 3 chấm)</strong> ở góc trên bên phải trình duyệt Chrome / Samsung Internet.</li>' +
+                    '<li>Chọn <strong>"Cài đặt ứng dụng"</strong> hoặc <strong>"Thêm vào màn hình chính"</strong>.</li>' +
+                    '<li>Bấm <strong>Cài đặt</strong> để đưa biểu tượng <strong>BVNT Sơn La</strong> ra màn hình điện thoại.</li>' +
+                  '</ol>';
+              }
+              pwaModal.hidden = false;
+            });
+          }
+
+          if (pwaModalClose && pwaModal) {
+            pwaModalClose.addEventListener("click", function () {
+              pwaModal.hidden = true;
+            });
+            pwaModal.addEventListener("click", function (e) {
+              if (e.target === pwaModal) pwaModal.hidden = true;
+            });
+          }
 
           // Khởi tạo trạng thái ban đầu: BMBH và NĐBH là cùng 1 người
           setSamePersonMode(true);
