@@ -301,6 +301,21 @@ function calculateDisabilitySumAssured(annualBasicPremium, deathBenefit) {
   return Math.min(deathBenefit, maxTTTBVV);
 }
 
+// ASGD: Quyền lợi tử vong do tai nạn của BMBH = 50% STBH gia tăng,
+// giới hạn tối đa 200 triệu đồng. Dùng chung cho UI, minh họa và tóm tắt.
+function calculateAsgdAccidentBenefit(increasedSumAssured) {
+  const amount = Number(increasedSumAssured) || 0;
+  return Math.min(Math.round(amount * 0.5), 200000000);
+}
+
+function getAsgdSumAssuredLimits(annualBasicPremium) {
+  const premium = Number(annualBasicPremium) || 0;
+  return {
+    min: Math.max(50000000, premium * 10),
+    max: Math.min(10000000000, premium * 20)
+  };
+}
+
 function getDeathSumAssuredMaxFactor(age, gender) {
   const maxFactorRows = [
     { maxAge: 4, male: 45, female: 50 },
@@ -2731,8 +2746,25 @@ function updateAthdTermAndAgeValidity(age = "-") {
 function updateDisabilitySumAssured() {
   const label = document.getElementById("secondaryBenefitLabel");
   const output = document.getElementById("disabilitySumAssured");
+  const note = output?.closest(".field-row")?.querySelector(".field-note");
 
   if (isLifeCare20()) return;
+
+  if (selectedMainProduct === "ASGD") {
+    if (label) label.textContent = "Tử vong do tai nạn của BMBH";
+    const deathSumAssured = moneyValue("deathSumAssured");
+    if (output) output.value = formatCommaNumber(calculateAsgdAccidentBenefit(deathSumAssured));
+    if (note) {
+      note.textContent = "50% STBH gia tăng, tối đa 200 triệu đồng. Không thu phí bảo hiểm rủi ro cho quyền lợi này.";
+      note.removeAttribute("aria-hidden");
+    }
+    return;
+  }
+
+  if (note) {
+    note.textContent = "";
+    note.setAttribute("aria-hidden", "true");
+  }
 
   if (selectedMainProduct === "ATPN") {
     if (label) label.textContent = "Chu toàn hậu sự";
@@ -2925,8 +2957,57 @@ function renderLifeCareBenefits() {
   document.getElementById("resultsSection").hidden = false;
 }
 
+function updateAsgdInputValidation() {
+  const annualPremium = moneyValue("annualPremium");
+  const additionalPremiumInput = document.getElementById("additionalPremium");
+  const additionalPremiumNote = document.getElementById("additionalPremiumRange");
+  const deathSumAssuredInput = document.getElementById("deathSumAssured");
+  const rangeNote = document.getElementById("deathSumAssuredRange");
+  if (!deathSumAssuredInput || !rangeNote) return;
+
+  const sumAssuredLimits = getAsgdSumAssuredLimits(annualPremium);
+  const minSumAssured = sumAssuredLimits.min;
+  const maxSumAssured = sumAssuredLimits.max;
+  const sumAssured = moneyValue("deathSumAssured");
+  const rangeText = `${formatVND(minSumAssured)} - ${formatVND(maxSumAssured)} đồng`;
+  let sumAssuredError = "";
+
+  if (minSumAssured > maxSumAssured) {
+    sumAssuredError = "Phí cơ bản quy năm hiện tại không tạo được khoảng STBH hợp lệ theo giới hạn ASGD. Hãy kiểm tra lại phí cơ bản.";
+  } else if (sumAssured < minSumAssured || sumAssured > maxSumAssured) {
+    sumAssuredError = `STBH gốc ASGD phải trong khoảng ${rangeText} (10–20 lần phí cơ bản quy năm).`;
+  } else if (sumAssured % 1000000 !== 0) {
+    sumAssuredError = "STBH gốc ASGD phải là bội số của 1.000.000 đồng.";
+  }
+
+  deathSumAssuredInput.setCustomValidity(sumAssuredError);
+  rangeNote.textContent = minSumAssured > maxSumAssured
+    ? sumAssuredError
+    : `ASGD: ${rangeText}; STBH phải là bội số 1.000.000 đồng (10–20 lần phí cơ bản quy năm; giới hạn chung 50 triệu–10 tỷ).`;
+  rangeNote.classList.toggle("is-error", Boolean(sumAssuredError));
+
+  const additionalPremium = moneyValue("additionalPremium");
+  const maxAdditionalPremium = annualPremium * 5;
+  let additionalPremiumError = "";
+  if (additionalPremium > 0 && additionalPremium < 1000000) {
+    additionalPremiumError = "Phí đóng thêm ASGD tối thiểu là 1.000.000 đồng/lần đóng.";
+  } else if (additionalPremium > maxAdditionalPremium) {
+    additionalPremiumError = `Phí đóng thêm ASGD không được vượt quá 5 lần phí cơ bản quy năm (${formatVND(maxAdditionalPremium)} đồng).`;
+  }
+  additionalPremiumInput?.setCustomValidity(additionalPremiumError);
+  if (additionalPremiumNote) {
+    additionalPremiumNote.hidden = false;
+    additionalPremiumNote.textContent = maxAdditionalPremium < 1000000
+      ? `ASGD: mức tối đa hiện tại ${formatVND(maxAdditionalPremium)} đồng thấp hơn mức tối thiểu 1.000.000 đồng/lần; chưa thể đóng thêm với mức phí cơ bản này.`
+      : (additionalPremiumError || `ASGD: nếu có đóng thêm, từ 1.000.000 đến ${formatVND(maxAdditionalPremium)} đồng/lần (tối đa 5 lần phí cơ bản quy năm).`);
+    additionalPremiumNote.classList.toggle("is-error", Boolean(additionalPremiumError));
+  }
+}
+
 function updateDeathSumAssuredRange() {
   const annualPremium = moneyValue("annualPremium");
+  const additionalPremiumInput = document.getElementById("additionalPremium");
+  const additionalPremiumNote = document.getElementById("additionalPremiumRange");
   const dateOfBirth = document.getElementById("dateOfBirth").value;
   const birthDate = parseDateInput(dateOfBirth);
   const age = birthDate ? calculateAge(dateOfBirth) : null;
@@ -2935,6 +3016,8 @@ function updateDeathSumAssuredRange() {
   const rangeNote = document.getElementById("deathSumAssuredRange");
 
   if (isLifeCare20()) {
+    additionalPremiumInput?.setCustomValidity("");
+    if (additionalPremiumNote) additionalPremiumNote.hidden = true;
     const range = getLifeCareSumAssuredRange(age);
     rangeNote.classList.add("life-care-range-note");
 
@@ -2962,6 +3045,17 @@ function updateDeathSumAssuredRange() {
   }
 
   rangeNote.classList.remove("life-care-range-note");
+
+  if (selectedMainProduct === "ASGD") {
+    updateAsgdInputValidation();
+    return;
+  }
+
+  additionalPremiumInput?.setCustomValidity("");
+  if (additionalPremiumNote) {
+    additionalPremiumNote.hidden = true;
+    additionalPremiumNote.classList.remove("is-error");
+  }
 
   const range = age === null ? null : getDeathSumAssuredRange(annualPremium, age, gender);
 

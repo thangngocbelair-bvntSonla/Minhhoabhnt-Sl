@@ -902,6 +902,9 @@
           padding: 8px 10px;
         }
       }
+      #additionalPremiumRange[hidden] {
+        display: none !important;
+      }
     </style>
   </head>
   <body>
@@ -1127,6 +1130,7 @@
               <label class="field-row single-line-field icon-plus legacy-illustration-field">
                 <span>Phí đóng thêm</span>
                 <input id="additionalPremium" class="money-input" name="additionalPremium" type="text" inputmode="numeric" />
+                <small id="additionalPremiumRange" class="field-note" hidden></small>
               </label>
 
               <div class="plan-option-group">
@@ -1942,6 +1946,8 @@
         window.updateDeathSumAssuredRange = function () {
           const ids = getActiveInsuredIds();
           const annualPremium = moneyValue("annualPremium");
+          const additionalPremiumInput = document.getElementById("additionalPremium");
+          const additionalPremiumNote = document.getElementById("additionalPremiumRange");
           const dateOfBirth = document.getElementById(ids.dateOfBirth)?.value || "";
           const birthDate = parseDateInput(dateOfBirth);
           const age = birthDate ? calculateAge(dateOfBirth) : null;
@@ -1950,6 +1956,8 @@
           const rangeNote = document.getElementById("deathSumAssuredRange");
 
           if (isLifeCare20()) {
+            additionalPremiumInput?.setCustomValidity("");
+            if (additionalPremiumNote) additionalPremiumNote.hidden = true;
             const range = getLifeCareSumAssuredRange(age);
             rangeNote.classList.add("life-care-range-note");
 
@@ -1977,6 +1985,15 @@
           }
 
           rangeNote.classList.remove("life-care-range-note");
+          if (selectedMainProduct === "ASGD") {
+            updateAsgdInputValidation();
+            return;
+          }
+          additionalPremiumInput?.setCustomValidity("");
+          if (additionalPremiumNote) {
+            additionalPremiumNote.hidden = true;
+            additionalPremiumNote.classList.remove("is-error");
+          }
           const range = age === null ? null : getDeathSumAssuredRange(annualPremium, age, gender);
 
           if (!range) {
@@ -2826,6 +2843,19 @@
           return (code || selectedMainProduct) === "ASGD";
         }
 
+        function setAsgdMaxSumAssured() {
+          const premium = moneyValue("annualPremium");
+          const input = document.getElementById("deathSumAssured");
+          if (!input || typeof getAsgdSumAssuredLimits !== "function") return false;
+          const limits = getAsgdSumAssuredLimits(premium);
+          const maximumAllowed = Math.floor(limits.max / 1000000) * 1000000;
+          if (limits.min > limits.max || maximumAllowed < limits.min) return false;
+          input.value = formatCommaNumber(maximumAllowed);
+          updateDeathSumAssuredRange();
+          updateDisabilitySumAssured();
+          return true;
+        }
+
         // Phí ban đầu Phí cơ bản của ASGD theo Phụ lục 2 (Trang 37/38)
         function getAsgdBasicInitialFeeRate(payingYear, contractTermYears) {
           if (payingYear <= 0) return 0;
@@ -3018,8 +3048,8 @@
               2 * cumulativeBasicPremiumPaid
             ) + topupAccountBeforeBonus;
 
-            // Quyền lợi Tử vong do Tai nạn BMBH (Điều 2.1): 50% STBH gia tăng, tối đa 200 triệu (Miễn phí rủi ro)
-            const bmbhAccidentBenefit = Math.min(increasedSumAssured * 0.5, 200000000);
+            // Quyền lợi Tử vong do Tai nạn BMBH (Điều 2.1): 50% STBH gia tăng, tối đa 200 triệu; không thu phí rủi ro cho quyền lợi này.
+            const bmbhAccidentBenefit = calculateAsgdAccidentBenefit(increasedSumAssured);
 
             const totalBonusThisMonth = educationBonus + basicMaturityBonus + topupMaturityBonus;
 
@@ -3138,9 +3168,14 @@
           const label = document.getElementById("secondaryBenefitLabel");
           const output = document.getElementById("disabilitySumAssured");
           if (selectedMainProduct === "ASGD") {
-            if (label) label.textContent = "TV Tai nạn BMBH (Miễn phí)";
+            if (label) label.textContent = "Tử vong do tai nạn của BMBH";
             const deathSumAssured = moneyValue("deathSumAssured");
-            if (output) output.value = formatCommaNumber(Math.min(Math.round(deathSumAssured * 0.5), 200000000));
+            if (output) output.value = formatCommaNumber(calculateAsgdAccidentBenefit(deathSumAssured));
+            const note = output?.closest(".field-row")?.querySelector(".field-note");
+            if (note) {
+              note.textContent = "50% STBH gia tăng, tối đa 200 triệu đồng. Không thu phí bảo hiểm rủi ro cho quyền lợi này.";
+              note.removeAttribute("aria-hidden");
+            }
             return;
           }
           baseUpdateDisabilitySumAssured();
@@ -3367,6 +3402,7 @@
             window.__setSamePersonModeRef(false);
           }
           baseUpdateMainProductState(value);
+          if (value === "ASGD") setAsgdMaxSumAssured();
           updateAsgdConfigUI(value === "ASGD");
           if (value === "ASGD" && !document.getElementById("resultsSection").hidden) {
             window.refreshIllustration();
@@ -3412,7 +3448,7 @@
             const term = Number(snapshot.policyTermYears) || 18;
             snapshot.asgdSummary = {
               increasedSumAssuredEnd: Math.round(snapshot.mainSumInsured * (1 + 0.05 * Math.max(term - 1, 0))),
-              bmbhAccidentBenefit: Math.min(Math.round(snapshot.mainSumInsured * 0.5), 200000000),
+              bmbhAccidentBenefit: calculateAsgdAccidentBenefit(snapshot.mainSumInsured * (1 + 0.05 * Math.max(term - 1, 0))),
               eduMilestonesText: document.getElementById("asgdEduMilestonesText")?.textContent || "",
               maturityBonusText: document.getElementById("asgdMaturityBonusText")?.textContent || ""
             };
@@ -3804,7 +3840,7 @@
           y += 48;
 
           const secondCardTitle = isAsgd
-            ? "TỬ VONG DO TAI NẠN BMBH\n(MIỄN PHÍ RỦI RO)"
+            ? "TỬ VONG DO TAI NẠN BMBH\n(KHÔNG THU PHÍ RỦI RO)"
             : (snapshot.mainProduct === "ATPN" ? "CHU TOÀN HẬU SỰ" : "QUYỀN LỢI THƯƠNG TẬT\nTOÀN BỘ VĨNH VIỄN");
 
           const protectionCards = [
@@ -5173,6 +5209,12 @@
           }
           document.getElementById("annualPremium")?.addEventListener("input", function () {
             if (selectedMainProduct === "ASGD") updateAsgdConfigUI(false);
+          });
+          document.getElementById("annualPremium")?.addEventListener("change", function () {
+            if (selectedMainProduct !== "ASGD") return;
+            setAsgdMaxSumAssured();
+            updateAsgdConfigUI(false);
+            if (!document.getElementById("resultsSection").hidden) window.refreshIllustration();
           });
           document.getElementById("deathSumAssured")?.addEventListener("input", function () {
             if (selectedMainProduct === "ASGD") updateAsgdConfigUI(false);
