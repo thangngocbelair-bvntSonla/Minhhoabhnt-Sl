@@ -902,8 +902,256 @@
           padding: 8px 10px;
         }
       }
-      #additionalPremiumRange[hidden] {
-        display: none !important;
+      /* Giao diện cấu hình nâng cao cho R26 & R29 */
+      .r26-plan-grid-v23 {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .r26-plan-btn-v23 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        padding: 9px 6px;
+        border-radius: 10px;
+        border: 1.5px solid #cfe1f2;
+        background: #ffffff;
+        color: #172033;
+        cursor: pointer;
+        transition: all 0.18s ease;
+        text-align: center;
+      }
+      .r26-plan-btn-v23:hover:not(:disabled) {
+        border-color: #004b93;
+        background: #eef6ff;
+      }
+      .r26-plan-btn-v23.active {
+        border-color: #003b7a;
+        background: linear-gradient(135deg, #003b7a 0%, #0059b8 100%);
+        color: #ffffff;
+        box-shadow: 0 6px 14px rgba(0, 59, 122, 0.22);
+      }
+      .r26-plan-btn-v23:disabled {
+        opacity: 0.48;
+        cursor: not-allowed;
+        background: #f1f5f9;
+        border-color: #dbe4ee;
+      }
+      .r26-plan-btn-v23 strong {
+        font-size: 0.86rem;
+        font-weight: 800;
+      }
+      .r26-plan-btn-v23 span {
+        font-size: 0.74rem;
+        font-weight: 700;
+        color: #004b93;
+      }
+      .r26-plan-btn-v23.active span {
+        color: #f4c542;
+      }
+      .r26-plan-btn-v23 small {
+        font-size: 0.68rem;
+        color: #64748b;
+        line-height: 1.2;
+      }
+      .r26-plan-btn-v23.active small {
+        color: #d8ebff;
+      }
+      .r26-benefit-grid-v23 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .r26-benefit-card-v23 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        padding: 11px 12px;
+        border-radius: 11px;
+        border: 1.5px solid #cfe1f2;
+        background: #ffffff;
+        color: #172033;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.18s ease;
+      }
+      .r26-benefit-card-v23:hover:not(:disabled) {
+        border-color: #004b93;
+        background: #f4f9ff;
+      }
+      .r26-benefit-card-v23.active {
+        border-color: #003b7a;
+        background: linear-gradient(180deg, #eef6ff 0%, #ffffff 100%);
+        box-shadow: 0 4px 12px rgba(0, 59, 122, 0.12);
+      }
+      .r26-benefit-card-v23.mandatory {
+        cursor: default;
+        border-color: #0b7a75;
+        background: linear-gradient(180deg, #edfbf9 0%, #ffffff 100%);
+      }
+      .r26-benefit-card-v23:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: #f4f6f9;
+      }
+      .r26-benefit-card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        width: 100%;
+      }
+      .r26-benefit-card-head strong {
+        font-size: 0.88rem;
+        font-weight: 800;
+        color: #003b7a;
+      }
+      .r26-benefit-tag {
+        font-size: 0.69rem;
+        font-weight: 800;
+        padding: 2px 7px;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+      .r26-benefit-tag.required {
+        background: #d8f5f1;
+        color: #0b7a75;
+      }
+      .r26-benefit-tag.selected {
+        background: #003b7a;
+        color: #ffffff;
+      }
+      .r26-benefit-tag.optional {
+        background: #e6f0fa;
+        color: #526b82;
+      }
+      .r26-benefit-fee-line {
+        font-size: 0.84rem;
+        font-weight: 800;
+        color: #d85b00;
+      }
+      .r26-benefit-meta-line {
+        font-size: 0.74rem;
+        color: #526b82;
+        line-height: 1.3;
+      }
+      .r26-info-strip,
+      .r29-info-panel {
+        margin-top: 12px;
+        background: #f8fbff;
+        border: 1px solid #cfe1f2;
+        border-radius: 11px;
+        padding: 11px 13px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .r26-info-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .r26-info-pill {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #003b7a;
+        background: #e6f0fa;
+        padding: 4px 9px;
+        border-radius: 999px;
+      }
+      .r26-info-pill.warm {
+        background: #fff3cd;
+        color: #856404;
+      }
+      .r26-info-pill.teal {
+        background: #e0f7f5;
+        color: #0b7a75;
+      }
+      .r29-summary-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .r29-stat-box {
+        background: #ffffff;
+        border: 1px solid #d4e3f3;
+        border-radius: 9px;
+        padding: 8px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .r29-stat-box.warm {
+        background: #fffdf4;
+        border-color: #f2bd81;
+      }
+      .r29-stat-box small {
+        font-size: 0.72rem;
+        color: #526b82;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      .r29-stat-box strong {
+        font-size: 0.94rem;
+        color: #003b7a;
+        font-weight: 800;
+      }
+      .r29-stat-box.warm strong {
+        color: #d85b00;
+      }
+      .r29-stat-box span {
+        font-size: 0.73rem;
+        color: #64748b;
+      }
+      .r29-benefit-mini-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .r29-benefit-mini-item {
+        background: #ffffff;
+        border: 1px solid #e2ecf7;
+        border-radius: 8px;
+        padding: 7px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+      }
+      .r29-benefit-mini-item span {
+        color: #526b82;
+        font-weight: 600;
+      }
+      .r29-benefit-mini-item strong {
+        color: #003b7a;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+      .rider-renewal-note {
+        margin: 8px 0 0 0;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: #fff8e1;
+        border: 1px solid #f5d07a;
+        color: #7a5200;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+      @media (max-width: 640px) {
+        .r26-plan-grid-v23 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .r26-benefit-grid-v23,
+        .r29-summary-grid,
+        .r29-benefit-mini-list {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -1130,7 +1378,6 @@
               <label class="field-row single-line-field icon-plus legacy-illustration-field">
                 <span>Phí đóng thêm</span>
                 <input id="additionalPremium" class="money-input" name="additionalPremium" type="text" inputmode="numeric" />
-                <small id="additionalPremiumRange" class="field-note" hidden></small>
               </label>
 
               <div class="plan-option-group">
@@ -1946,8 +2193,6 @@
         window.updateDeathSumAssuredRange = function () {
           const ids = getActiveInsuredIds();
           const annualPremium = moneyValue("annualPremium");
-          const additionalPremiumInput = document.getElementById("additionalPremium");
-          const additionalPremiumNote = document.getElementById("additionalPremiumRange");
           const dateOfBirth = document.getElementById(ids.dateOfBirth)?.value || "";
           const birthDate = parseDateInput(dateOfBirth);
           const age = birthDate ? calculateAge(dateOfBirth) : null;
@@ -1956,8 +2201,6 @@
           const rangeNote = document.getElementById("deathSumAssuredRange");
 
           if (isLifeCare20()) {
-            additionalPremiumInput?.setCustomValidity("");
-            if (additionalPremiumNote) additionalPremiumNote.hidden = true;
             const range = getLifeCareSumAssuredRange(age);
             rangeNote.classList.add("life-care-range-note");
 
@@ -1985,15 +2228,6 @@
           }
 
           rangeNote.classList.remove("life-care-range-note");
-          if (selectedMainProduct === "ASGD") {
-            updateAsgdInputValidation();
-            return;
-          }
-          additionalPremiumInput?.setCustomValidity("");
-          if (additionalPremiumNote) {
-            additionalPremiumNote.hidden = true;
-            additionalPremiumNote.classList.remove("is-error");
-          }
           const range = age === null ? null : getDeathSumAssuredRange(annualPremium, age, gender);
 
           if (!range) {
@@ -2554,11 +2788,13 @@
               : ('<span class="selected-rider-owner-badge ' + (item.role === "NDBH" ? "ndbh" : "bmbh") + '">' +
                   (item.role === "NDBH" ? "🛡️ NĐBH: " : "👤 BMBH: ") + item.context.fullName +
                  '</span>');
-            const stbhText = item.product.maxSumInsured
+            const stbhText = item.code === "R29"
+              ? (formatVND(item.selection.sumInsured) + " đồng/ngày")
+              : item.product.maxSumInsured
               ? formatCurrency(item.selection.sumInsured)
               : (item.code === "R24"
                   ? (formatCurrency(item.context.mainAnnualPremium) + "/năm • Bảo vệ " + item.selection.term + " năm (Đóng phí " + getR24PaymentTerm(item.selection.term) + " năm, miễn " + getR24WaiverYears(item.selection.term) + " năm)")
-                  : item.selection.r26Plan);
+                  : ("Hạng " + item.selection.r26Plan + " (" + (item.selection.r26Benefits || ["inpatient"]).map(function (b) { return R26_BENEFIT_LABELS[b] || b; }).join(", ") + ")"));
 
             return (
               '<article class="selected-rider" data-rider-owner="' + item.role + '" data-rider-item-code="' + item.code + '" data-premium="' + formatCurrency(item.result.annualPremium) + '" style="cursor: pointer;">' +
@@ -2654,7 +2890,9 @@
                   const numericSumInsured = product.maxSumInsured
                     ? selection.sumInsured
                     : (stbhRange?.readonlyValue || 0);
-                  const displaySumInsured = product.maxSumInsured
+                  const displaySumInsured = selection.code === "R29"
+                    ? (formatVND(selection.sumInsured) + " đồng/ngày")
+                    : product.maxSumInsured
                     ? formatCurrency(selection.sumInsured)
                     : selection.code === "R24"
                     ? (formatCurrency(ctx.mainAnnualPremium) + "/năm (" + selection.term + " năm • Đóng " + getR24PaymentTerm(selection.term) + " năm)")
@@ -2841,19 +3079,6 @@
 
         function isAsgdProduct(code) {
           return (code || selectedMainProduct) === "ASGD";
-        }
-
-        function setAsgdMaxSumAssured() {
-          const premium = moneyValue("annualPremium");
-          const input = document.getElementById("deathSumAssured");
-          if (!input || typeof getAsgdSumAssuredLimits !== "function") return false;
-          const limits = getAsgdSumAssuredLimits(premium);
-          const maximumAllowed = Math.floor(limits.max / 1000000) * 1000000;
-          if (limits.min > limits.max || maximumAllowed < limits.min) return false;
-          input.value = formatCommaNumber(maximumAllowed);
-          updateDeathSumAssuredRange();
-          updateDisabilitySumAssured();
-          return true;
         }
 
         // Phí ban đầu Phí cơ bản của ASGD theo Phụ lục 2 (Trang 37/38)
@@ -3048,8 +3273,8 @@
               2 * cumulativeBasicPremiumPaid
             ) + topupAccountBeforeBonus;
 
-            // Quyền lợi Tử vong do Tai nạn BMBH (Điều 2.1): 50% STBH gia tăng, tối đa 200 triệu; không thu phí rủi ro cho quyền lợi này.
-            const bmbhAccidentBenefit = calculateAsgdAccidentBenefit(increasedSumAssured);
+            // Quyền lợi Tử vong do Tai nạn BMBH (Điều 2.1): 50% STBH gia tăng, tối đa 200 triệu (Miễn phí rủi ro)
+            const bmbhAccidentBenefit = Math.min(increasedSumAssured * 0.5, 200000000);
 
             const totalBonusThisMonth = educationBonus + basicMaturityBonus + topupMaturityBonus;
 
@@ -3168,14 +3393,9 @@
           const label = document.getElementById("secondaryBenefitLabel");
           const output = document.getElementById("disabilitySumAssured");
           if (selectedMainProduct === "ASGD") {
-            if (label) label.textContent = "Tử vong do tai nạn của BMBH";
+            if (label) label.textContent = "TV Tai nạn BMBH (Miễn phí)";
             const deathSumAssured = moneyValue("deathSumAssured");
-            if (output) output.value = formatCommaNumber(calculateAsgdAccidentBenefit(deathSumAssured));
-            const note = output?.closest(".field-row")?.querySelector(".field-note");
-            if (note) {
-              note.textContent = "50% STBH gia tăng, tối đa 200 triệu đồng. Không thu phí bảo hiểm rủi ro cho quyền lợi này.";
-              note.removeAttribute("aria-hidden");
-            }
+            if (output) output.value = formatCommaNumber(Math.min(Math.round(deathSumAssured * 0.5), 200000000));
             return;
           }
           baseUpdateDisabilitySumAssured();
@@ -3402,7 +3622,6 @@
             window.__setSamePersonModeRef(false);
           }
           baseUpdateMainProductState(value);
-          if (value === "ASGD") setAsgdMaxSumAssured();
           updateAsgdConfigUI(value === "ASGD");
           if (value === "ASGD" && !document.getElementById("resultsSection").hidden) {
             window.refreshIllustration();
@@ -3448,7 +3667,7 @@
             const term = Number(snapshot.policyTermYears) || 18;
             snapshot.asgdSummary = {
               increasedSumAssuredEnd: Math.round(snapshot.mainSumInsured * (1 + 0.05 * Math.max(term - 1, 0))),
-              bmbhAccidentBenefit: calculateAsgdAccidentBenefit(snapshot.mainSumInsured * (1 + 0.05 * Math.max(term - 1, 0))),
+              bmbhAccidentBenefit: Math.min(Math.round(snapshot.mainSumInsured * 0.5), 200000000),
               eduMilestonesText: document.getElementById("asgdEduMilestonesText")?.textContent || "",
               maturityBonusText: document.getElementById("asgdMaturityBonusText")?.textContent || ""
             };
@@ -3840,7 +4059,7 @@
           y += 48;
 
           const secondCardTitle = isAsgd
-            ? "TỬ VONG DO TAI NẠN BMBH\n(KHÔNG THU PHÍ RỦI RO)"
+            ? "TỬ VONG DO TAI NẠN BMBH\n(MIỄN PHÍ RỦI RO)"
             : (snapshot.mainProduct === "ATPN" ? "CHU TOÀN HẬU SỰ" : "QUYỀN LỢI THƯƠNG TẬT\nTOÀN BỘ VĨNH VIỄN");
 
           const protectionCards = [
@@ -4021,7 +4240,9 @@
               const riderAmountText = rider.code === "R24"
                 ? ("Bảo vệ " + (rider.term || 10) + " năm (Đóng " + getR24PaymentTerm(rider.term || 10) + "n)")
                 : rider.code === "R26"
-                ? ("Hạng: " + (rider.r26Plan || "-"))
+                ? ("Hạng " + (rider.r26Plan || "-") + " (" + (rider.r26Benefits || ["inpatient"]).map(function (b) { return R26_BENEFIT_LABELS[b] || b; }).join(", ") + ")")
+                : rider.code === "R29"
+                ? ("Trợ cấp: " + formatVND(rider.sumInsured) + " đ/ngày")
                 : ("STBH: " + (rider.sumInsured ? shortMoney(rider.sumInsured, 0) : (rider.displaySumInsured || "-")));
 
               const metaY = Math.max(nameBottom + 6, ry + 132);
@@ -4817,6 +5038,762 @@
           } catch (e) {}
         }
 
+
+        // Cập nhật kiểm tra quy định Phí bảo hiểm cơ bản tối thiểu và hệ số STBH cho An Sinh Giáo Dục (ASGD)
+        const baseUpdateDeathSumAssuredRangeV21 = window.updateDeathSumAssuredRange;
+        window.updateDeathSumAssuredRange = function () {
+          baseUpdateDeathSumAssuredRangeV21();
+          if (selectedMainProduct !== "ASGD") return;
+
+          const annualPremiumInput = document.getElementById("annualPremium");
+          const paymentModeSelect = document.getElementById("paymentMode");
+          if (!annualPremiumInput) return;
+
+          const annualVal = moneyValue("annualPremium");
+          const mode = paymentModeSelect?.value || "yearly";
+          const minAnnualByMode = {
+            yearly: 10000000,
+            halfYearly: 10000000, // 5tr/6thang -> 10tr/nam
+            quarterly: 12000000,  // 3tr/quy -> 12tr/nam
+            monthly: 12000000     // 1tr/thang -> 12tr/nam (không áp dụng HĐ mới)
+          };
+
+          const requiredMinAnnual = minAnnualByMode[mode] || 10000000;
+          if (mode === "monthly") {
+            annualPremiumInput.setCustomValidity("An Sinh Giáo Dục không áp dụng định kỳ đóng phí tháng đối với hợp đồng khai thác mới.");
+            return;
+          }
+
+          if (annualVal < requiredMinAnnual) {
+            annualPremiumInput.setCustomValidity("Phí định kỳ tối thiểu cho An Sinh Giáo Dục là " + formatVND(requiredMinAnnual) + " đồng/năm (đáp ứng mức tối thiểu theo định kỳ đã chọn).");
+          } else {
+            // Kiểm tra hệ số STBH gốc: Tối thiểu 10 lần, Tối đa 20 lần Phí bảo hiểm cơ bản
+            const deathSaInput = document.getElementById("deathSumAssured");
+            if (deathSaInput) {
+              const saVal = moneyValue("deathSumAssured");
+              const minSa = annualVal * 10;
+              const maxSa = annualVal * 20;
+              if (saVal < minSa || saVal > maxSa) {
+                deathSaInput.setCustomValidity("STBH gốc của An Sinh Giáo Dục phải từ 10 lần đến 20 lần Phí bảo hiểm cơ bản (Phạm vi hợp lệ: " + formatVND(minSa) + " đến " + formatVND(maxSa) + " đồng).");
+                const rangeNote = document.getElementById("deathSumAssuredRange");
+                if (rangeNote) {
+                  rangeNote.textContent = "Hệ số STBH hợp lệ: 10x - 20x Phí năm (" + formatVND(minSa) + " - " + formatVND(maxSa) + ")";
+                  rangeNote.classList.add("is-error");
+                }
+              } else {
+                deathSaInput.setCustomValidity("");
+              }
+            }
+          }
+        };
+
+
+        // ===============================
+        // 11. ENGINE BIỂU PHÍ & NGHIỆP VỤ CHUẨN R26 (BV-NR26/2025) & R29 (BV-NR29/2025)
+        // Phê chuẩn theo CV 20336/BTC-QLBH & CV 20335/BTC-QLBH ngày 29/12/2025
+        // ===============================
+
+        const R26_OFFICIAL_RATES = {
+          inpatient: [
+            [0, 0, [4808, 12591, 20546, 24282, 39439]],
+            [1, 2, [3345, 8444, 14208, 17243, 28065]],
+            [3, 3, [3717, 9382, 15786, 19159, 31183]],
+            [4, 4, [3717, 10555, 17760, 21554, 35081]],
+            [5, 5, [1352, 3278, 5354, 7837, 12756]],
+            [6, 6, [1521, 3278, 5354, 6966, 11339]],
+            [7, 8, [1521, 3278, 5354, 6269, 10205]],
+            [9, 9, [1352, 2950, 4818, 6269, 10205]],
+            [10, 12, [1095, 2283, 3703, 5031, 8182]],
+            [13, 14, [985, 2283, 3703, 5031, 8182]],
+            [15, 15, [1323, 2565, 4364, 6112, 9946]],
+            [16, 19, [1191, 2565, 4364, 6112, 9946]],
+            [20, 24, [1483, 2635, 5253, 7596, 12357]],
+            [25, 29, [1628, 2660, 5689, 8325, 13538]],
+            [30, 34, [1683, 3053, 5873, 8578, 13947]],
+            [35, 39, [1764, 3198, 6143, 8968, 14576]],
+            [40, 44, [1816, 3477, 6400, 9208, 14960]],
+            [45, 49, [2106, 4457, 7610, 10680, 17355]],
+            [50, 54, [2420, 5364, 8845, 12258, 19916]],
+            [55, 59, [2718, 6298, 10048, 13738, 22318]],
+            [60, 64, [3626, 8401, 13418, 18374, 29853]],
+            [65, 70, [3853, 8928, 14281, 19584, 31830]]
+          ],
+          outpatient: [
+            [0, 0, [null, 3300, 6186, 13402, 28846]],
+            [1, 3, [null, 1422, 2666, 5776, 12432]],
+            [4, 4, [null, 1778, 3333, 7220, 15540]],
+            [5, 6, [null, 488, 912, 2200, 5325]],
+            [7, 8, [null, 488, 912, 2200, 4260]],
+            [9, 9, [null, 610, 912, 1980, 4260]],
+            [10, 14, [null, 262, 492, 1064, 2290]],
+            [15, 19, [null, 422, 792, 1714, 3690]],
+            [20, 24, [null, 770, 1446, 3132, 6740]],
+            [25, 29, [null, 1176, 2202, 4774, 10272]],
+            [30, 34, [null, 1198, 2244, 4862, 10468]],
+            [35, 39, [null, 990, 1856, 4022, 8652]],
+            [40, 44, [null, 990, 1856, 4022, 8652]],
+            [45, 49, [null, 1002, 1880, 4074, 8764]],
+            [50, 54, [null, 1130, 2116, 4588, 9874]],
+            [55, 59, [null, 1242, 2330, 5046, 10860]],
+            [60, 64, [null, 1366, 2562, 5550, 11946]],
+            [65, 70, [null, 1340, 2510, 5442, 11710]]
+          ],
+          dental: [[0, 70, [null, 796, 1044, 1262, 1826]]],
+          maternity: [[18, 45, [null, 7229, 13494, 20706, 30963]]]
+        };
+
+        const R26_MIN_MAIN_AFYP = {
+          "Bạc": 5000000,
+          "Vàng": 10000000,
+          "Bạch Kim": 20000000,
+          "Kim Cương": 30000000,
+          "Lục Bảo": 50000000
+        };
+
+        const R26_INPATIENT_SHORT_LIMITS = {
+          "Bạc": "150tr/năm",
+          "Vàng": "250tr/năm",
+          "Bạch Kim": "500tr/năm",
+          "Kim Cương": "1 tỷ/năm",
+          "Lục Bảo": "2 tỷ/năm"
+        };
+
+        const R29_OFFICIAL_RATES = [
+          { min: 0, max: 4, male: 3703, female: 3254 },
+          { min: 5, max: 9, male: 2057, female: 1835 },
+          { min: 10, max: 14, male: 1433, female: 1215 },
+          { min: 15, max: 19, male: 1300, female: 1149 },
+          { min: 20, max: 24, male: 1218, female: 1256 },
+          { min: 25, max: 29, male: 1437, female: 1474 },
+          { min: 30, max: 34, male: 1621, female: 1723 },
+          { min: 35, max: 39, male: 1772, female: 1853 },
+          { min: 40, max: 44, male: 1953, female: 2158 },
+          { min: 45, max: 49, male: 2482, female: 2961 },
+          { min: 50, max: 54, male: 3175, female: 3650 },
+          { min: 55, max: 59, male: 4302, female: 4446 },
+          { min: 60, max: 64, male: 5392, female: 5392 },
+          { min: 65, max: 69, male: 7935, female: 7169 }
+        ];
+
+        function getR26OfficialRate(age, gender, plan, benefitType) {
+          if (age === null || age === undefined || age < 0 || age > 70) return null;
+          if (benefitType === "maternity" && (gender !== "Nữ" || age < 18 || age > 45)) return null;
+          const planIndex = R26_PLANS.indexOf(plan);
+          if (planIndex < 0) return null;
+          const rows = R26_OFFICIAL_RATES[benefitType] || [];
+          const row = rows.find(function (item) { return age >= item[0] && age <= item[1]; });
+          if (!row) return null;
+          return row[2][planIndex] || null;
+        }
+
+        function getR26PlanEligibility(plan, context) {
+          const planIndex = R26_PLANS.indexOf(plan);
+          if (planIndex < 0) return { allowed: false, reason: "Chương trình không hợp lệ." };
+
+          const minAfyp = R26_MIN_MAIN_AFYP[plan] || 5000000;
+          const afyp = Number(context?.mainAnnualPremium) || 0;
+          const age = context?.age;
+          const isSupplementaryPerson = !isSamePersonMode() && context?.roleKey === "BMBH";
+
+          // Quy định Trang 19: NĐBH bổ sung (BMBH khi khác NĐBH) giới hạn tối đa gói Vàng
+          if (isSupplementaryPerson && planIndex > 1) {
+            return { allowed: false, reason: "BMBH (NĐBH bổ sung) tối đa gói Vàng." };
+          }
+          // Quy định Trang 19: Trẻ 0-4 tuổi tối đa gói Bạch Kim
+          if (age !== null && age !== undefined && age <= 4 && planIndex > 2) {
+            return { allowed: false, reason: "Trẻ 0–4 tuổi tối đa gói Bạch Kim." };
+          }
+          // Quy định Trang 20-21: Phí định kỳ quy năm SPC tối thiểu theo từng chương trình
+          if (afyp < minAfyp) {
+            return { allowed: false, reason: "Cần phí SPC ≥ " + (minAfyp / 1000000) + "tr/năm." };
+          }
+          return { allowed: true, reason: "" };
+        }
+
+        function getR26HighestAllowedPlan(context) {
+          let best = null;
+          R26_PLANS.forEach(function (plan) {
+            if (getR26PlanEligibility(plan, context).allowed) best = plan;
+          });
+          return best;
+        }
+
+        // Ghi đè normalizeR26Selection: Luôn giữ Nội trú là bắt buộc & loại bỏ Thai sản nếu không phải Nữ 18-45 tuổi
+        window.normalizeR26Selection = function (selection, context) {
+          const ctx = context || getCurrentInputContext();
+          if (!R26_PLANS.includes(selection.r26Plan)) {
+            selection.r26Plan = "Vàng";
+          }
+          // Nếu gói đang chọn không đủ điều kiện AFYP/Tuổi/Đối tượng thì tự động hạ về gói hợp lệ cao nhất
+          const elig = getR26PlanEligibility(selection.r26Plan, ctx);
+          if (!elig.allowed) {
+            const fallbackPlan = getR26HighestAllowedPlan(ctx);
+            if (fallbackPlan) {
+              selection.r26Plan = fallbackPlan;
+            }
+          }
+
+          const allowedBenefits = getR26AllowedBenefits(selection.r26Plan);
+          const cleaned = (selection.r26Benefits || []).filter(function (benefit) {
+            if (!allowedBenefits.includes(benefit)) return false;
+            if (benefit === "maternity") {
+              if (ctx.gender !== "Nữ") return false;
+              if (ctx.age !== null && ctx.age !== undefined && (ctx.age < 18 || ctx.age > 45)) return false;
+            }
+            return true;
+          });
+
+          // Quyền lợi Điều trị Nội trú luôn là BẮT BUỘC
+          if (!cleaned.includes("inpatient")) {
+            cleaned.unshift("inpatient");
+          }
+          selection.r26Benefits = cleaned;
+        };
+
+        // Ghi đè calculateR26Premium theo đúng Biểu phí 20336/BTC-QLBH và quy tắc điều kiện tham gia
+        window.calculateR26Premium = function (selection, context) {
+          const ctx = context || getCurrentInputContext();
+          if (ctx.age === null || ctx.age === undefined) {
+            return { premium: 0, annualPremium: 0, error: "Chưa nhập ngày sinh." };
+          }
+          if (ctx.age < 0 || ctx.age > 69) {
+            return { premium: 0, annualPremium: 0, error: "R26 chỉ áp dụng cho độ tuổi từ 0 đến 65 tuổi (tái tục đến 69 tuổi)." };
+          }
+          if ((Number(ctx.mainAnnualPremium) || 0) < 5000000) {
+            return { premium: 0, annualPremium: 0, error: "Phí định kỳ năm của Sản phẩm chính phải từ 5.000.000 đồng trở lên để tham gia R26." };
+          }
+          if (ctx.paymentMode === "monthly") {
+            return { premium: 0, annualPremium: 0, error: "R26 khai thác mới không áp dụng định kỳ đóng phí tháng (chỉ áp dụng Năm, 6 tháng, Quý)." };
+          }
+
+          window.normalizeR26Selection(selection, ctx);
+          const planElig = getR26PlanEligibility(selection.r26Plan, ctx);
+          if (!planElig.allowed) {
+            return { premium: 0, annualPremium: 0, error: "Gói " + selection.r26Plan + ": " + planElig.reason };
+          }
+
+          let annualPremium = 0;
+          const errors = [];
+          (selection.r26Benefits || ["inpatient"]).forEach(function (benefit) {
+            const rate = getR26OfficialRate(ctx.age, ctx.gender, selection.r26Plan, benefit);
+            if (!rate) {
+              errors.push(R26_BENEFIT_LABELS[benefit] + " không áp dụng");
+              return;
+            }
+            annualPremium += rate * 1000;
+          });
+
+          const factor = PAYMENT_MODE_FACTOR[ctx.paymentMode] || 1;
+          const premium = Math.round(annualPremium * factor);
+          return {
+            premium: premium,
+            annualPremium: annualPremium,
+            error: errors.join(". "),
+            renewalNotice: ctx.age > 65 ? "Lưu ý: Tuổi tham gia mới R26 tối đa 65 tuổi; mức phí trên áp dụng cho hợp đồng tái tục (đến 69 tuổi)." : ""
+          };
+        };
+
+        // Hàm tính chi tiết giới hạn STBH R29 theo cả 3 tiêu chí: Tuổi, 0,2% STBH chính và AFYP HĐ chính (Trang 20 TLHV)
+        function getR29DetailedLimits(context) {
+          const age = context?.age;
+          const isBmbhRole = !isSamePersonMode() && context?.roleKey === "BMBH";
+          const afyp = Number(context?.mainAnnualPremium) || 0;
+          const mainSa = Number(context?.mainSumAssured) || 0;
+
+          if (age === null || age === undefined) {
+            return { allowed: false, min: 100000, max: 100000, reason: "Chưa nhập ngày sinh để tính hạn mức R29." };
+          }
+          if (isBmbhRole && age < 18) {
+            return { allowed: false, min: 100000, max: 100000, reason: "BMBH tham gia R29 phải từ 18 đến 60 tuổi (tái tục đến 69 tuổi)." };
+          }
+          if (age < 0 || age > 69) {
+            return { allowed: false, min: 100000, max: 100000, reason: "R29 áp dụng cho NĐBH từ 0 đến 60 tuổi (tái tục tối đa 69 tuổi)." };
+          }
+
+          // Giới hạn theo AFYP của Hợp đồng chính Khai thác mới (Trang 20)
+          let maxByAfyp = 0;
+          let afypLabel = "";
+          if (afyp < 10000000) {
+            return {
+              allowed: false,
+              min: 100000,
+              max: 0,
+              reason: "R29 yêu cầu Phí định kỳ năm của Sản phẩm chính từ 10.000.000 đồng trở lên."
+            };
+          } else if (afyp < 30000000) {
+            maxByAfyp = 300000;
+            afypLabel = "Phí chính 10 – <30tr: tối đa 300.000 đ/ngày";
+          } else if (afyp < 50000000) {
+            maxByAfyp = 500000;
+            afypLabel = "Phí chính 30 – <50tr: tối đa 500.000 đ/ngày";
+          } else if (afyp < 100000000) {
+            maxByAfyp = 1000000;
+            afypLabel = "Phí chính 50 – <100tr: tối đa 1.000.000 đ/ngày";
+          } else {
+            maxByAfyp = 1000000; // Tối đa mỗi HĐKTM theo bảng tuổi là 1.000.000đ (tổng các HĐ là 2tr)
+            afypLabel = "Phí chính ≥100tr: tối đa 1.000.000 đ/HĐ (2tr tổng các HĐ)";
+          }
+
+          const maxByAge = age < 18 ? 300000 : 1000000;
+          const maxByMainSa = Math.floor((mainSa * 0.002) / 100000) * 100000;
+          const finalMax = Math.floor(Math.min(maxByAge, maxByAfyp, maxByMainSa) / 100000) * 100000;
+
+          if (finalMax < 100000) {
+            return {
+              allowed: false,
+              min: 100000,
+              max: 0,
+              reason: "0,2% STBH Sản phẩm chính (" + formatVND(Math.round(mainSa * 0.002)) + " đ) thấp hơn mức tối thiểu 100.000 đ/ngày của R29."
+            };
+          }
+
+          let bindingReason = "Giới hạn theo độ tuổi";
+          if (finalMax === maxByMainSa && maxByMainSa <= maxByAfyp && maxByMainSa <= maxByAge) {
+            bindingReason = "Giới hạn bởi 0,2% STBH chính";
+          } else if (finalMax === maxByAfyp && maxByAfyp <= maxByAge) {
+            bindingReason = afypLabel;
+          } else {
+            bindingReason = age < 18 ? "Trẻ em 0–17 tuổi: tối đa 300.000 đ/ngày" : "Người lớn ≥18 tuổi: tối đa 1.000.000 đ/ngày";
+          }
+
+          return {
+            allowed: true,
+            min: 100000,
+            max: finalMax,
+            maxByAge: maxByAge,
+            maxByAfyp: maxByAfyp,
+            maxByMainSa: maxByMainSa,
+            afypLabel: afypLabel,
+            bindingReason: bindingReason,
+            renewalNotice: age > 60 ? "Lưu ý: Tuổi tham gia mới R29 tối đa 60 tuổi; mức phí trên áp dụng cho hợp đồng tái tục (61–69 tuổi)." : ""
+          };
+        }
+
+        function getR29OfficialRate(age, gender) {
+          if (age === null || age === undefined) return null;
+          const row = R29_OFFICIAL_RATES.find(function (item) { return age >= item.min && age <= item.max; });
+          if (!row) return null;
+          return gender === "Nam" ? row.male : row.female;
+        }
+
+        // Ghi đè getRiderStbhRange để áp dụng đầy đủ quy định AFYP & độ tuổi cho R29 và R26
+        const baseGetRiderStbhRangeV23 = window.getRiderStbhRange;
+        window.getRiderStbhRange = function (product, selection, context = getCurrentInputContext()) {
+          if (product && product.code === "R29") {
+            const limits = getR29DetailedLimits(context);
+            if (!limits.allowed) {
+              return {
+                addonCode: "R29",
+                min: limits.min,
+                max: limits.max,
+                currentStbh: Number(selection?.sumInsured) || 0,
+                readonlyValue: null,
+                usesManualStbh: true,
+                allowed: true, // Cho phép mở tab xem lý do thay vì khóa cứng hoàn toàn
+                valid: false,
+                reason: limits.reason,
+                error: limits.reason,
+                occupationMessage: ""
+              };
+            }
+            const cur = Number(selection?.sumInsured) || 0;
+            const isValid = cur >= limits.min && cur <= limits.max;
+            return {
+              addonCode: "R29",
+              min: limits.min,
+              max: limits.max,
+              currentStbh: cur,
+              readonlyValue: null,
+              usesManualStbh: true,
+              allowed: true,
+              valid: isValid,
+              reason: isValid ? "" : ("STBH R29 phải nằm trong khoảng " + formatVND(limits.min) + " – " + formatVND(limits.max) + " đ/ngày (" + limits.bindingReason + ")."),
+              error: isValid ? "" : ("STBH R29 phải nằm trong khoảng " + formatVND(limits.min) + " – " + formatVND(limits.max) + " đ/ngày (" + limits.bindingReason + ")."),
+              occupationMessage: "",
+              r29Limits: limits
+            };
+          }
+
+          if (product && product.code === "R26") {
+            window.normalizeR26Selection(selection, context);
+            const planElig = getR26PlanEligibility(selection.r26Plan, context);
+            return {
+              addonCode: "R26",
+              min: null,
+              max: null,
+              currentStbh: 0,
+              readonlyValue: null,
+              usesManualStbh: false,
+              allowed: true,
+              valid: planElig.allowed,
+              reason: planElig.reason,
+              error: planElig.reason,
+              occupationMessage: ""
+            };
+          }
+
+          return baseGetRiderStbhRangeV23(product, selection, context);
+        };
+
+        // Ghi đè calculateRiderPremium để R26 và R29 dùng trực tiếp engine chuẩn 2025/2026
+        const baseCalculateRiderPremiumV23 = window.calculateRiderPremium;
+        window.calculateRiderPremium = function (code, selection, context = getCurrentInputContext()) {
+          if (code === "R26") {
+            if (!selection || !selection.enabled) return { premium: 0, annualPremium: 0, error: "" };
+            return window.calculateR26Premium(selection, context);
+          }
+
+          if (code === "R29") {
+            if (!selection || !selection.enabled) return { premium: 0, annualPremium: 0, error: "" };
+            const limits = getR29DetailedLimits(context);
+            if (!limits.allowed) {
+              return { premium: 0, annualPremium: 0, error: limits.reason };
+            }
+            const stbh = Number(selection.sumInsured) || 0;
+            if (stbh < limits.min || stbh > limits.max) {
+              return {
+                premium: 0,
+                annualPremium: 0,
+                error: "STBH R29 phải nằm trong khoảng " + formatVND(limits.min) + " – " + formatVND(limits.max) + " đ/ngày (" + limits.bindingReason + ")."
+              };
+            }
+            const rate = getR29OfficialRate(context.age, context.gender);
+            if (!rate) {
+              return { premium: 0, annualPremium: 0, error: "Không tìm thấy tỷ lệ phí R29 cho độ tuổi này." };
+            }
+            const annualPremium = Math.round(rate * (stbh / 1000));
+            const factor = PAYMENT_MODE_FACTOR[context.paymentMode] || 1;
+            const premium = Math.round(annualPremium * factor);
+            return {
+              premium: premium,
+              annualPremium: annualPremium,
+              rate: rate,
+              error: "",
+              renewalNotice: limits.renewalNotice || ""
+            };
+          }
+
+          return baseCalculateRiderPremiumV23(code, selection, context);
+        };
+
+        // Nâng cấp bảng chi tiết quyền lợi R26 (hiển thị trong Popup & ghép vào Poster Dài / PDF)
+        window.buildR26BenefitRows = function (selection) {
+          const ctx = getCurrentInputContext();
+          window.normalizeR26Selection(selection, ctx);
+          const plan = R26_PLANS.includes(selection.r26Plan) ? selection.r26Plan : "Vàng";
+          const selectedBenefits = new Set(selection.r26Benefits || ["inpatient"]);
+          const isChildUnder5 = ctx.age !== null && ctx.age !== undefined && ctx.age <= 4;
+          const inpatientCopayText = isChildUnder5
+            ? "Đồng chi trả 20% (NĐBH 0–4 tuổi)"
+            : "0% đồng chi trả — BVNT chi trả 100% (từ 5 tuổi trở lên)";
+          const scopeText = plan === "Lục Bảo" ? "Đông Nam Á (Nội trú) • Việt Nam (các QL khác)" : "Việt Nam";
+
+          const rows = [
+            spbkBenefitRow("Chương trình & Phạm vi địa lý", "Hạng " + plan + " • " + scopeText, inpatientCopayText, "inpatient"),
+            spbkBenefitRow("Giới hạn Điều trị Nội trú tối đa", formatR26Limit(plan, "inpatientAnnual", "/năm"), "Quyền lợi bắt buộc (bao gồm các mục I + II + III + IV)", "inpatient"),
+            spbkBenefitRow("Nhân đôi hạn mức Nội trú do Tai nạn", "Tăng thêm +100% = +" + formatR26Limit(plan, "inpatientAnnual", "/năm"), "Kích hoạt 1 lần/năm khi dùng hết hạn mức Nội trú; chi trả 50% CPYT thực tế", "inpatient"),
+            spbkBenefitRow("Nội trú có Phẫu thuật / Không Phẫu thuật", formatR26Limit(plan, "inpatientSurgery", "/đợt") + " • " + formatR26Limit(plan, "inpatientNoSurgery", "/đợt"), "Giới hạn cho mỗi Đợt điều trị Nội trú", "inpatient"),
+            spbkBenefitRow("Phòng & Giường / Khoa ICU", formatR26Limit(plan, "room", "/ngày") + " • ICU: Chi phí thực tế", "Phòng & giường tối đa 60 ngày/năm • ICU tối đa 30 ngày/năm", "inpatient"),
+            spbkBenefitRow("Điều trị Trước nhập viện & Sau xuất viện", "Chi phí y tế thực tế (trong hạn mức Nội trú)", "Trước nhập viện 30 ngày (1 lần gần nhất) • Sau xuất viện 60 ngày (1 lần gần nhất)", "inpatient"),
+            spbkBenefitRow("Giường người chăm sóc (<18 tuổi) & Răng do Tai nạn", formatR26Limit(plan, "caregiverBed", "/ngày") + " • " + formatR26Limit(plan, "accidentalDental", "/năm"), "Giường người chăm sóc tối đa 30 ngày/năm khi NĐBH dưới 18 tuổi", "inpatient"),
+            spbkBenefitRow("Điều trị Ung thư (Hóa trị, Xạ trị, Trúng đích, Miễn dịch...)", "Lên tới " + formatR26Limit(plan, "inpatientAnnual", "/năm"), "Tính chung trong giới hạn Điều trị Nội trú (loại trừ liệu pháp proton)", "inpatient"),
+            spbkBenefitRow("Cấy ghép Nội tạng (Thận, Tim, Gan, Phổi, Tụy, Tủy xương)", "Người nhận (NĐBH): 100% • Người hiến: 50% Phẫu thuật", "Tối đa 1 lần trong suốt thời gian tham gia R26; tính chung hạn mức Nội trú", "inpatient"),
+            spbkBenefitRow("Chạy thận nhân tạo định kỳ / Xe cứu thương", formatR26Limit(plan, "dialysis", "/năm") + " • " + formatR26Limit(plan, "ambulance", "/năm"), "Thuộc nhóm Điều trị Ngoại trú & Trong ngày đặc biệt", "inpatient"),
+            spbkBenefitRow("Điều trị trong ngày đặc biệt / Phẫu thuật trong ngày", formatR26Limit(plan, "specialDayTreatment", "/năm") + " • " + formatR26Limit(plan, "daySurgery", "/ngày"), "Cấp cứu (gồm nha khoa do tai nạn), sốt xuất huyết, cúm, viêm phổi, phế quản", "inpatient")
+          ];
+
+          if (selectedBenefits.has("outpatient")) {
+            rows.push(
+              spbkBenefitRow("Điều trị Ngoại trú (Tùy chọn • Đồng chi trả 20%)", formatR26Limit(plan, "outpatientAnnual", "/năm"), "Giới hạn " + formatR26Limit(plan, "outpatientVisit", "/lần") + " (tối đa 10 lần/năm)", "outpatient"),
+              spbkBenefitRow("Vật lý trị liệu (thuộc QL Ngoại trú)", formatR26Limit(plan, "physiotherapy", "/năm"), "Tối đa 01 đợt/năm; đồng chi trả 20%", "outpatient")
+            );
+          }
+
+          if (selectedBenefits.has("dental")) {
+            rows.push(
+              spbkBenefitRow("Chăm sóc Nha khoa (Tùy chọn • Đồng chi trả 20%)", formatR26Limit(plan, "dentalAnnual", "/năm"), "Điều trị nha khoa: " + formatR26Limit(plan, "dentalTreatment", "/lần") + " • Lấy cao răng: " + formatR26Limit(plan, "dentalScaling", "/lần") + " (1 lần/năm)", "dental"),
+              spbkBenefitRow("Mão răng và Cầu răng (thuộc QL Nha khoa)", "Chi phí y tế thực tế (trong hạn mức Nha khoa)", "Đồng chi trả 20% chi phí y tế thực tế", "dental")
+            );
+          }
+
+          if (selectedBenefits.has("maternity")) {
+            rows.push(
+              spbkBenefitRow("Quyền lợi Thai sản (Nữ 18–45 tuổi • Đồng chi trả 20%)", formatR26Limit(plan, "maternityAnnual", "/năm"), "Sinh thường: " + formatR26Limit(plan, "normalDelivery", "/năm") + " • Sinh mổ / Biến chứng: " + formatR26Limit(plan, "cSection", "/năm"), "maternity"),
+              spbkBenefitRow("Phòng & Giường / ICU Thai sản", formatR26Limit(plan, "maternityRoom", "/ngày") + " • ICU: Thực tế", "Phòng & giường tối đa 30 ngày/năm • ICU tối đa 15 ngày/năm", "maternity")
+            );
+          }
+
+          rows.push(
+            spbkBenefitRow("Thời gian chờ áp dụng", "Tai nạn: 0 ngày • Bệnh khác: 30 ngày", "Bệnh đặc biệt / Ung thư / Cấy ghép nội tạng: 90 ngày • Thai sản: 270 ngày", "inpatient")
+          );
+
+          return rows;
+        };
+
+        // Nâng cấp bảng chi tiết quyền lợi R29 (hiển thị trong Popup & ghép vào Poster Dài / PDF)
+        window.buildR29BenefitRows = function (stbh) {
+          const ambulance = calculateBenefitMultiple(stbh, 2, 1000000);
+          return [
+            spbkBenefitRow("Trợ cấp viện phí cơ bản", "100% STBH = " + formatBenefitMoney(stbh, "/ngày"), "Nằm viện qua 1 đêm tính 1 ngày; tối đa 50 ngày/năm & 3 lần nằm viện/năm (5–25 ngày/nhóm bệnh)"),
+            spbkBenefitRow("Trợ cấp viện phí đặc biệt (ICU)", "200% STBH = " + formatBenefitMoney(calculateBenefitMultiple(stbh, 2), "/ngày"), "Tối đa 30 ngày/năm; tối đa 300 ngày toàn thời hạn (gồm tái tục)"),
+            spbkBenefitRow("Trợ cấp Phẫu thuật cơ bản", "5 x STBH = " + formatBenefitMoney(calculateBenefitMultiple(stbh, 5), "/lần"), "Tối đa 02 lần phẫu thuật/năm; tối đa 10 lần toàn thời hạn"),
+            spbkBenefitRow("Trợ cấp Phẫu thuật đặc biệt", "10 x STBH = " + formatBenefitMoney(calculateBenefitMultiple(stbh, 10), "/lần"), "Áp dụng 10 nhóm phẫu thuật đặc biệt (ghép tạng, mổ tim mở, mở hộp sọ, cắt thận/gan/phổi...)"),
+            spbkBenefitRow("Hỗ trợ chi phí Vận chuyển cấp cứu", "2 x STBH = " + formatBenefitMoney(ambulance, "/lần"), "Tối đa 1.000.000 đ/lần; tối đa 2 lần/năm & 10 lần toàn thời hạn; KHÔNG áp dụng thời gian chờ"),
+            spbkBenefitRow("Giới hạn tổng & Chấm dứt R29", "Tối đa 1.000 x STBH = " + formatBenefitMoney(calculateBenefitMultiple(stbh, 1000)), "Hoặc tối đa 100 ngày nằm viện (cơ bản + ICU) trong 03 năm hiệu lực liên tiếp"),
+            spbkBenefitRow("Thời gian chờ áp dụng", "Tai nạn / VCCC: 0 ngày • Bệnh & PT khác: 30 ngày", "Bệnh đặc biệt, Phẫu thuật đặc biệt: 90 ngày (Phạm vi: Cơ sở y tế tại Việt Nam)")
+          ];
+        };
+
+        // Ghi đè giao diện chọn R26: Hiển thị hạn mức, phí tối thiểu SPC, phí chi tiết từng quyền lợi và tự động khóa mục không hợp lệ
+        window.renderR26Controls = function (selection) {
+          const ctx = getCurrentInputContext();
+          window.normalizeR26Selection(selection, ctx);
+          const allowedBenefits = getR26AllowedBenefits(selection.r26Plan);
+          const isChildUnder5 = ctx.age !== null && ctx.age !== undefined && ctx.age <= 4;
+          const isSupplementaryPerson = !isSamePersonMode() && ctx.roleKey === "BMBH";
+
+          const planButtonsHtml = R26_PLANS.map(function (plan) {
+            const elig = getR26PlanEligibility(plan, ctx);
+            const isActive = selection.r26Plan === plan;
+            const minAfypTr = R26_MIN_MAIN_AFYP[plan] / 1000000;
+            return (
+              '<button ' +
+                'class="r26-plan-btn-v23 ' + (isActive ? "active" : "") + '" ' +
+                'type="button" ' +
+                'data-r26-plan-v23="' + plan + '" ' +
+                'aria-pressed="' + isActive + '" ' +
+                (elig.allowed ? "" : ('disabled title="' + elig.reason + '"')) +
+              '>' +
+                '<strong>' + plan + '</strong>' +
+                '<span>' + R26_INPATIENT_SHORT_LIMITS[plan] + '</span>' +
+                '<small>' + (elig.allowed ? ("SPC ≥" + minAfypTr + "tr") : elig.reason) + '</small>' +
+              '</button>'
+            );
+          }).join("");
+
+          const benefitMetaMap = {
+            inpatient: {
+              limit: formatR26Limit(selection.r26Plan, "inpatientAnnual", "/năm"),
+              copay: isChildUnder5 ? "Đồng chi trả 20% (0–4 tuổi)" : "Đồng chi trả 0% (BVNT trả 100%)",
+              mandatory: true
+            },
+            outpatient: {
+              limit: formatR26Limit(selection.r26Plan, "outpatientAnnual", "/năm"),
+              copay: "Đồng chi trả 20% • Tối đa 10 lần/năm",
+              mandatory: false
+            },
+            dental: {
+              limit: formatR26Limit(selection.r26Plan, "dentalAnnual", "/năm"),
+              copay: "Đồng chi trả 20% • Gồm lấy cao răng",
+              mandatory: false
+            },
+            maternity: {
+              limit: formatR26Limit(selection.r26Plan, "maternityAnnual", "/năm"),
+              copay: "Đồng chi trả 20% • Chờ 270 ngày",
+              mandatory: false
+            }
+          };
+
+          const benefitCardsHtml = Object.entries(R26_BENEFIT_LABELS).map(function (entry) {
+            const key = entry[0];
+            const label = entry[1];
+            const meta = benefitMetaMap[key];
+            const isActive = selection.r26Benefits.includes(key);
+            let isDisabled = !allowedBenefits.includes(key);
+            let disabledNote = "Áp dụng từ gói Vàng trở lên";
+
+            if (key === "maternity" && !isDisabled) {
+              if (ctx.gender !== "Nữ" || (ctx.age !== null && ctx.age !== undefined && (ctx.age < 18 || ctx.age > 45))) {
+                isDisabled = true;
+                disabledNote = "Chỉ áp dụng cho Nữ từ 18–45 tuổi";
+              }
+            }
+
+            const rate = (!isDisabled && ctx.age !== null && ctx.age !== undefined)
+              ? getR26OfficialRate(ctx.age, ctx.gender, selection.r26Plan, key)
+              : null;
+            const feeText = rate ? (formatVND(rate * 1000) + " đ/năm") : (isDisabled ? "Không áp dụng" : "Nhập ngày sinh");
+
+            const tagHtml = meta.mandatory
+              ? '<span class="r26-benefit-tag required">✓ Bắt buộc</span>'
+              : (isActive
+                  ? '<span class="r26-benefit-tag selected">✓ Đã chọn</span>'
+                  : '<span class="r26-benefit-tag optional">Tùy chọn</span>');
+
+            return (
+              '<button ' +
+                'class="r26-benefit-card-v23 ' + (isActive ? "active " : "") + (meta.mandatory ? "mandatory" : "") + '" ' +
+                'type="button" ' +
+                'data-r26-benefit-v23="' + key + '" ' +
+                'aria-pressed="' + isActive + '" ' +
+                (isDisabled ? "disabled" : "") +
+              '>' +
+                '<div class="r26-benefit-card-head">' +
+                  '<strong>' + label + '</strong>' +
+                  tagHtml +
+                '</div>' +
+                '<div class="r26-benefit-fee-line">' + feeText + '</div>' +
+                '<div class="r26-benefit-meta-line">' +
+                  (isDisabled ? disabledNote : ("Hạn mức: " + meta.limit + " • " + meta.copay)) +
+                '</div>' +
+              '</button>'
+            );
+          }).join("");
+
+          const scopeBadge = selection.r26Plan === "Lục Bảo"
+            ? "🌏 Phạm vi: Đông Nam Á (Nội trú)"
+            : "🇻🇳 Phạm vi: Việt Nam";
+
+          const roleRuleNote = isSupplementaryPerson
+            ? '<span class="r26-info-pill warm">👤 NĐBH bổ sung (BMBH): Tối đa gói Vàng</span>'
+            : (isChildUnder5
+                ? '<span class="r26-info-pill warm">👶 Trẻ 0–4 tuổi: Tối đa gói Bạch Kim • Nội trú đồng chi trả 20%</span>'
+                : '<span class="r26-info-pill teal">🛡️ Từ 5 tuổi trở lên: Nội trú đồng chi trả 0%</span>');
+
+          const r26Calc = window.calculateR26Premium(Object.assign({}, selection, { enabled: true }), ctx);
+
+          return (
+            '<div class="r26-config">' +
+              '<section class="r26-plan-panel">' +
+                '<div class="r26-control-title">' +
+                  '<strong>Chương trình bảo hiểm R26 (theo phí SPC ' + formatShortMoney(ctx.mainAnnualPremium) + '/năm)</strong>' +
+                  '<span>Hạng ' + selection.r26Plan + '</span>' +
+                '</div>' +
+                '<div class="r26-plan-grid-v23">' + planButtonsHtml + '</div>' +
+              '</section>' +
+              '<section class="r26-benefit-panel">' +
+                '<div class="r26-control-title">' +
+                  '<strong>Quyền lợi tham gia (Nội trú bắt buộc)</strong>' +
+                  '<span>' + selection.r26Benefits.length + '/' + allowedBenefits.length + ' quyền lợi</span>' +
+                '</div>' +
+                '<div class="r26-benefit-grid-v23">' + benefitCardsHtml + '</div>' +
+              '</section>' +
+              '<div class="r26-info-strip">' +
+                '<div class="r26-info-pills">' +
+                  '<span class="r26-info-pill">' + scopeBadge + '</span>' +
+                  '<span class="r26-info-pill">⚡ Nhân đôi hạn mức Nội trú do Tai nạn (+100%)</span>' +
+                  roleRuleNote +
+                  '<span class="r26-info-pill">⏳ Chờ: 0 ngày (TN) • 30 ngày (Bệnh) • 90 ngày (ĐB/Ung thư) • 270 ngày (Thai sản)</span>' +
+                '</div>' +
+                (r26Calc.renewalNotice ? ('<p class="rider-renewal-note">ℹ️ ' + r26Calc.renewalNotice + '</p>') : '') +
+              '</div>' +
+            '</div>'
+          );
+        };
+
+        // Hàm tạo khung Tóm tắt Quyền lợi & Biểu phí trực tiếp cho R29 trong thẻ chi tiết
+        function buildR29PreviewPanelHtml(selection, context) {
+          const limits = getR29DetailedLimits(context);
+          const stbh = Number(selection.sumInsured) || 100000;
+          const rate = getR29OfficialRate(context.age, context.gender);
+          const ambulance = Math.min(stbh * 2, 1000000);
+
+          return (
+            '<div class="r29-info-panel">' +
+              '<div class="r29-summary-grid">' +
+                '<div class="r29-stat-box">' +
+                  '<small>Tỷ lệ phí chuẩn năm</small>' +
+                  '<strong>' + (rate ? (formatVND(rate) + ' đ') : '-') + '</strong>' +
+                  '<span>Trên 1.000đ STBH (' + context.gender + ', ' + (context.age ?? '-') + 'T)</span>' +
+                '</div>' +
+                '<div class="r29-stat-box warm">' +
+                  '<small>Trần STBH tối đa/HĐ</small>' +
+                  '<strong>' + (limits.allowed ? (formatVND(limits.max) + ' đ/ngày') : 'Không đủ ĐK') + '</strong>' +
+                  '<span>' + (limits.allowed ? limits.bindingReason : limits.reason) + '</span>' +
+                '</div>' +
+                '<div class="r29-stat-box">' +
+                  '<small>Tổng quyền lợi tối đa</small>' +
+                  '<strong>' + formatShortMoney(stbh * 1000) + '</strong>' +
+                  '<span>1.000x STBH • Tối đa 100 ngày/3 năm</span>' +
+                '</div>' +
+              '</div>' +
+              '<div class="r29-benefit-mini-list">' +
+                '<div class="r29-benefit-mini-item"><span>🏥 Viện phí cơ bản (≤50n/năm)</span><strong>' + formatVND(stbh) + ' đ/ngày</strong></div>' +
+                '<div class="r29-benefit-mini-item"><span>🚨 Viện phí ICU (≤30n/năm)</span><strong>' + formatVND(stbh * 2) + ' đ/ngày</strong></div>' +
+                '<div class="r29-benefit-mini-item"><span>🩺 Phẫu thuật cơ bản (5x)</span><strong>' + formatVND(stbh * 5) + ' đ/lần</strong></div>' +
+                '<div class="r29-benefit-mini-item"><span>⚕️ Phẫu thuật đặc biệt (10x)</span><strong>' + formatVND(stbh * 10) + ' đ/lần</strong></div>' +
+                '<div class="r29-benefit-mini-item"><span>🚑 Vận chuyển cấp cứu (0 ngày chờ)</span><strong>' + formatVND(ambulance) + ' đ/lần</strong></div>' +
+                '<div class="r29-benefit-mini-item"><span>⏳ Thời gian chờ</span><strong>0 / 30 / 90 ngày</strong></div>' +
+              '</div>' +
+              (limits.renewalNotice ? ('<p class="rider-renewal-note">ℹ️ ' + limits.renewalNotice + '</p>') : '') +
+            '</div>'
+          );
+        }
+
+        // Mở rộng renderRiderDetail để chèn thêm khung Tóm tắt R29 ngay trong thẻ chi tiết R29
+        const prevRenderRiderDetailV23 = window.renderRiderDetail;
+        window.renderRiderDetail = function () {
+          prevRenderRiderDetailV23();
+          const detailCard = document.getElementById("riderDetailCard");
+          if (!detailCard || riderState.hideStbhControls) return;
+          if (riderState.activeCode === "R29") {
+            const ctx = getCurrentInputContext();
+            const selection = getRiderSelection("R29");
+            const amountControls = detailCard.querySelector(".amount-controls");
+            if (amountControls) {
+              const wrapper = document.createElement("div");
+              wrapper.id = "r29PreviewPanelWrapper";
+              wrapper.innerHTML = buildR29PreviewPanelHtml(selection, ctx);
+              amountControls.insertAdjacentElement("afterend", wrapper);
+            }
+          }
+        };
+
+        // Mở rộng bindRiderDetailEvents để gắn sự kiện chọn Chương trình & Quyền lợi cho R26 (bảo vệ Nội trú bắt buộc) và cập nhật live panel R29
+        const prevBindRiderDetailEventsV23 = window.bindRiderDetailEvents;
+        window.bindRiderDetailEvents = function (product, selection) {
+          prevBindRiderDetailEventsV23(product, selection);
+          if (!product) return;
+
+          if (product.code === "R26") {
+            const ctx = getCurrentInputContext();
+            document.querySelectorAll("[data-r26-plan-v23]").forEach(function (btn) {
+              btn.addEventListener("click", function () {
+                if (btn.disabled) return;
+                selection.r26Plan = btn.getAttribute("data-r26-plan-v23");
+                selection.selected = true;
+                selection.enabled = true;
+                window.normalizeR26Selection(selection, ctx);
+                renderRiderUI();
+              });
+            });
+
+            document.querySelectorAll("[data-r26-benefit-v23]").forEach(function (btn) {
+              btn.addEventListener("click", function () {
+                if (btn.disabled) return;
+                const key = btn.getAttribute("data-r26-benefit-v23");
+                // Nội trú là quyền lợi bắt buộc -> không cho bỏ chọn
+                if (key === "inpatient") {
+                  selection.selected = true;
+                  selection.enabled = true;
+                  renderRiderUI();
+                  return;
+                }
+                const set = new Set(selection.r26Benefits || ["inpatient"]);
+                if (set.has(key)) set.delete(key);
+                else set.add(key);
+                set.add("inpatient");
+                selection.r26Benefits = Array.from(set);
+                selection.selected = true;
+                selection.enabled = true;
+                window.normalizeR26Selection(selection, ctx);
+                renderRiderUI();
+              });
+            });
+          }
+
+          if (product.code === "R29") {
+            const syncR29Panel = function () {
+              const wrap = document.getElementById("r29PreviewPanelWrapper");
+              if (wrap) {
+                wrap.innerHTML = buildR29PreviewPanelHtml(selection, getCurrentInputContext());
+              }
+            };
+            document.getElementById("riderAmountInput")?.addEventListener("input", syncR29Panel);
+            document.getElementById("riderAmountRange")?.addEventListener("input", syncR29Panel);
+          }
+        };
+
         // --- XỬ LÝ SỰ KIỆN ĐỘC LẬP CHO BMBH VÀ NĐBH ---
         const DEFAULT_JOB_GROUP_2 = 1;
         const JOBS_LIST = Array.isArray(window.OCCUPATION_JOBS) ? window.OCCUPATION_JOBS : [];
@@ -5209,12 +6186,6 @@
           }
           document.getElementById("annualPremium")?.addEventListener("input", function () {
             if (selectedMainProduct === "ASGD") updateAsgdConfigUI(false);
-          });
-          document.getElementById("annualPremium")?.addEventListener("change", function () {
-            if (selectedMainProduct !== "ASGD") return;
-            setAsgdMaxSumAssured();
-            updateAsgdConfigUI(false);
-            if (!document.getElementById("resultsSection").hidden) window.refreshIllustration();
           });
           document.getElementById("deathSumAssured")?.addEventListener("input", function () {
             if (selectedMainProduct === "ASGD") updateAsgdConfigUI(false);
